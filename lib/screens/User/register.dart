@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
-class LoginPage extends StatefulWidget {
+import 'package:aplicativo_turismo/screens/User/login.dart';
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool value = true;
 
   @override
@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const Text(
-                "Iniciar sesión",
+                "Registro",
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
@@ -38,7 +38,29 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 0.0),
+                        vertical: 10.0, horizontal: 0.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: const [
+                            Text(
+                              'Nombre',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        const TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Ingresa tu nombre',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 0.0),
                     child: Column(
                       children: [
                         Row(
@@ -60,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 0.0),
+                        vertical: 10.0, horizontal: 0.0),
                     child: Column(
                       children: [
                         Row(
@@ -78,20 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: value,
-                        onChanged: (bool? value) {
-                          this.value = value!;
-                        },
-                      ),
-                      const Text(
-                        'Mantener abierta la sesión',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ],
                   ),
                   Padding(
                     padding:
@@ -114,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {},
-                            child: const Text('Ingresar'),
+                            child: const Text('Registrar'),
                           ),
                         ],
                       ),
@@ -129,15 +137,20 @@ class _LoginPageState extends State<LoginPage> {
                     height: 10,
                   ),
                   const Text(
-                    '¿No estas registrado?',
+                    '¿Ya estas registrado?',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
-                    child: const Text('Registrar'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage())
+                      );
+                    },
+                    child: const Text('Iniciar sesión'),
                   ),
                 ],
               )

@@ -1,4 +1,6 @@
-import 'package:aplicativo_turismo/screens/register.dart';
+import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
+import 'package:aplicativo_turismo/screens/User/register.dart';
+import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +19,10 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: RegisterPage(),
+      routes: {
+        '/home': (context) => menu(),
+        '/home/img_selecc': (context) => imagen(),
+      },
     );
   }
 }

@@ -1,11 +1,12 @@
+import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   bool value = true;
 
   @override
@@ -22,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const Text(
-                "Registro",
+                "Iniciar sesión",
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
@@ -38,29 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 0.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Text(
-                              'Nombre',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        const TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Ingresa tu nombre',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 0.0),
+                        vertical: 20.0, horizontal: 0.0),
                     child: Column(
                       children: [
                         Row(
@@ -82,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 0.0),
+                        vertical: 20.0, horizontal: 0.0),
                     child: Column(
                       children: [
                         Row(
@@ -100,6 +79,20 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ],
                     ),
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: value,
+                        onChanged: (bool? value) {
+                          this.value = value!;
+                        },
+                      ),
+                      const Text(
+                        'Mantener abierta la sesión',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding:
@@ -121,8 +114,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               primary: Colors.white,
                               textStyle: const TextStyle(fontSize: 20),
                             ),
-                            onPressed: () {},
-                            child: const Text('Registrar'),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/home');
+                            },
+                            child: const Text('Ingresar'),
                           ),
                         ],
                       ),
@@ -137,15 +132,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 10,
                   ),
                   const Text(
-                    '¿Ya estas registrado?',
+                    '¿No estas registrado?',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
-                    child: const Text('Iniciar sesión'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Registrar'),
                   ),
                 ],
               )
