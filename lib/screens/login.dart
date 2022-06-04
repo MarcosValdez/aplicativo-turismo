@@ -6,17 +6,23 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool value = true;
+  bool valuebox = true;
+
+  static final RegExp _emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9\-\_]+(\.[a-zA-Z]+)*$");
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool _esEmail(String str){
+    return _emailRegExp.hasMatch(str.toLowerCase());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black38,
-      body: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.grey),
-        padding: const EdgeInsets.all(30),
-        margin: const EdgeInsets.all(30),
+    return Form(
+
+        key: _formKey,
+
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,18 +48,29 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         Row(
-                          children: const [
+                          children: const<Widget> [
                             Text(
                               'Email',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
+
                           ],
                         ),
-                        const TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Ingresa tu correo',
                           ),
+                            validator: (value){
+
+                              if(value!.isEmpty){
+                                return "Ingrese correo";
+                              }else{
+                                if(!_esEmail(value.toString())){
+                                  return "Email invalido";
+                                }
+                              }
+                            }
                         ),
                       ],
                     ),
@@ -72,9 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        const TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                               hintText: 'Ingresa tu contraseña'),
+                            validator: (value){
+                              if(value!.isEmpty){
+                                return "Ingrese contraseña";
+                              }
+                            }
                         ),
                       ],
                     ),
@@ -82,9 +104,9 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     children: [
                       Checkbox(
-                        value: value,
+                        value: valuebox,
                         onChanged: (bool? value) {
-                          this.value = value!;
+                          this.valuebox = value!;
                         },
                       ),
                       const Text(
@@ -113,7 +135,16 @@ class _LoginPageState extends State<LoginPage> {
                               primary: Colors.white,
                               textStyle: const TextStyle(fontSize: 20),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              print('inicio');
+                              if(_formKey.currentState!.validate()){
+                                Scaffold.of(context).showSnackBar(
+                                    SnackBar(content: Text("accesando al sistema"))
+                                );
+                                print('intermedio');
+                              }
+                              print('final');
+                            },
                             child: const Text('Ingresar'),
                           ),
                         ],
@@ -144,7 +175,6 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
     );
   }
 }
