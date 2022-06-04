@@ -1,5 +1,3 @@
-import 'package:aplicativo_turismo/screens/calendar.dart';
-import 'package:aplicativo_turismo/screens/login.dart';
 import 'package:aplicativo_turismo/screens/register.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: RegisterPage(),
     );
   }
 }
