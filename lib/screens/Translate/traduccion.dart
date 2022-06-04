@@ -182,7 +182,7 @@ class _traduccionState extends State<traduccion>{
         children: [
           ElevatedButton.icon(
             onPressed: (){
-              Navigator.popUntil(context, ModalRoute.withName('/menu'));
+              Navigator.popUntil(context, ModalRoute.withName('/home'));
             },
             icon: Icon(Icons.assignment_return),
             label: Text('Volver al menú', textAlign: TextAlign.center),

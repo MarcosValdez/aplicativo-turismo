@@ -121,7 +121,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               primary: Colors.white,
                               textStyle: const TextStyle(fontSize: 20),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/home');
+                            },
                             child: const Text('Registrar'),
                           ),
                         ],
