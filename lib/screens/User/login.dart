@@ -1,3 +1,5 @@
+import 'package:aplicativo_turismo/screens/User/register.dart';
+import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -136,6 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
+
                               print('inicio');
                               if(_formKey.currentState!.validate()){
                                 Scaffold.of(context).showSnackBar(
@@ -144,6 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                                 print('intermedio');
                               }
                               print('final');
+                              Navigator.pushNamed(context, '/home');
+
                             },
                             child: const Text('Ingresar'),
                           ),
@@ -167,7 +172,13 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => RegisterPage())
+                      );
+                      //Navigator.pop(context);
+                    },
                     child: const Text('Registrar'),
                   ),
                 ],

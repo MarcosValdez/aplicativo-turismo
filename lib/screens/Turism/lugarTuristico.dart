@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: lugarTuristico(),
   ));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class lugarTuristico extends StatefulWidget {
+  const lugarTuristico({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  _lugarTuristicoState createState() => _lugarTuristicoState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _lugarTuristicoState extends State<lugarTuristico> {
   var Places = ['Macchu Picchu', 'Iquitos', 'Lunahuana'];
   var Desc = [
     'Machu Picchu es una ciudadela inca ubicada en las alturas de las montañas de los Andes en Perú, sobre el valle del río Urubamba.',

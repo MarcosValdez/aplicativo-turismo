@@ -1,5 +1,8 @@
-import 'package:aplicativo_turismo/screens/register.dart';
-import 'package:aplicativo_turismo/screens/login.dart';
+import 'package:aplicativo_turismo/screens/User/login.dart';
+import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
+import 'package:aplicativo_turismo/screens/User/register.dart';
+import 'package:aplicativo_turismo/screens/menu.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,7 +32,11 @@ class MyApp extends StatelessWidget {
           margin: const EdgeInsets.all(30),
           child: LoginPage(),
         ),
-      )
+      ),
+      routes: {
+        '/home': (context) => menu(),
+        '/home/img_selecc': (context) => imagen(),
+      },
     );
   }
 }

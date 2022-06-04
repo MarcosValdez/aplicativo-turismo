@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:aplicativo_turismo/screens/User/login.dart';
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -121,7 +121,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               primary: Colors.white,
                               textStyle: const TextStyle(fontSize: 20),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/home');
+                            },
                             child: const Text('Registrar'),
                           ),
                         ],
@@ -144,7 +146,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: const Text('Iniciar sesión'),
                   ),
                 ],
