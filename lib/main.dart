@@ -5,6 +5,19 @@ import 'package:aplicativo_turismo/screens/menu.dart';
 
 import 'package:flutter/material.dart';
 
+// Firebase
+// import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
+
+// To use firebase
+// void main() async{
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   runApp(const MyApp());
+// }
+
 void main() {
   runApp(const MyApp());
 }
