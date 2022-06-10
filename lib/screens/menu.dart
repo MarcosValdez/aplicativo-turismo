@@ -1,6 +1,8 @@
 import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
+import 'package:aplicativo_turismo/screens/Notes/new_note.dart';
+import 'package:aplicativo_turismo/screens/Notes/view_notes.dart';
 import 'package:flutter/material.dart';
 import 'Translate/imagen.dart';
 
@@ -22,6 +24,7 @@ class _menuState extends State<menu> {
               btn_trad(),
               btn_biblio(),
               btn_tur(),
+              btn_note(),
               btn_cal()
             ],
           ),
@@ -79,7 +82,23 @@ class _menuState extends State<menu> {
       )
     );
   }
-
+  Widget btn_note(){
+    return Container(
+        margin: EdgeInsets.only(top: 30),
+        width: 150,
+        height: 40,
+        child: ElevatedButton.icon(
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => notePage())
+            );
+          },
+          icon: Icon(Icons.travel_explore),
+          label: Text('Notas', textAlign: TextAlign.center),
+        )
+    );
+  }
   Widget btn_cal(){
     return Container(
         margin: EdgeInsets.only(top: 60, left: 20),
