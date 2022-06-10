@@ -37,6 +37,7 @@ dependencies:
   table_calendar: ^3.0.6
   image_picker: ^0.8.4+10
   carousel_slider: ^4.1.1
+  firebase_core: ^1.17.1
 
 dev_dependencies:
   flutter_test:
