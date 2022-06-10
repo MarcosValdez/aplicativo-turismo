@@ -11,7 +11,7 @@ class _LoginPageState extends State<LoginPage> {
   bool valuebox = true;
 
   static final RegExp _emailRegExp = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9\-\_]+(\.[a-zA-Z]+)*$");
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
 
   final _formKey = GlobalKey<FormState>();
 
@@ -22,9 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Form(
-
         key: _formKey,
-
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -138,17 +136,12 @@ class _LoginPageState extends State<LoginPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-
-                              print('inicio');
                               if(_formKey.currentState!.validate()){
                                 Scaffold.of(context).showSnackBar(
                                     SnackBar(content: Text("accesando al sistema"))
                                 );
-                                print('intermedio');
+                                Navigator.pushNamed(context, '/home');
                               }
-                              print('final');
-                              Navigator.pushNamed(context, '/home');
-
                             },
                             child: const Text('Ingresar'),
                           ),

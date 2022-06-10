@@ -8,16 +8,35 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool value = true;
 
+  static final RegExp _emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
+
+  static final RegExp _nombreRegExp = RegExp(
+      r"^[a-zA-Z].{2,33}$");
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool _esEmail(String str){
+    return _emailRegExp.hasMatch(str.toLowerCase());
+  }
+
+  bool _nombre(String str){
+    return _nombreRegExp.hasMatch(str.toLowerCase());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black38,
       body: Container(
+
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.grey),
         padding: const EdgeInsets.all(30),
         margin: const EdgeInsets.all(30),
-        child: Center(
+
+        child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -50,10 +69,20 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
-                        const TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Ingresa tu nombre',
                           ),
+                            validator: (value){
+
+                              if(value!.isEmpty){
+                                return "Ingresar nombre";
+                              }else{
+                                if(!_nombre(value.toString())){
+                                  return "Nombre extenso";
+                                }
+                              }
+                            }
                         ),
                       ],
                     ),
@@ -72,10 +101,20 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
-                        const TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Ingresa tu correo',
                           ),
+                            validator: (value){
+
+                              if(value!.isEmpty){
+                                return "Ingresar correo";
+                              }else{
+                                if(!_esEmail(value.toString())){
+                                  return "Correo invalido";
+                                }
+                              }
+                            }
                         ),
                       ],
                     ),
@@ -94,9 +133,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
-                        const TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                               hintText: 'Ingresa tu contraseña'),
+                            validator: (value){
+
+                              if(value!.isEmpty){
+                                return "Ingresar contraseña";
+                              }
+                            }
                         ),
                       ],
                     ),
@@ -122,7 +167,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/home');
+                              if(_formKey.currentState!.validate()){
+                                Navigator.pushNamed(context, '/home');
+                              }
                             },
                             child: const Text('Registrar'),
                           ),
