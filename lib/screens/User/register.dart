@@ -1,11 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  TextEditingController nombre = TextEditingController();
+  TextEditingController correo = TextEditingController();
+  TextEditingController contrasenia = TextEditingController();
+
+
+  registroUsuraio() async{
+    try{
+      await FirebaseFirestore.instance.collection('User').doc().set(
+        {
+          "nombre": nombre.text,
+          "correo": correo.text,
+          "contrasenia": contrasenia.text
+        }
+      );
+    }catch(e){
+      print("ERRO...."+ e.toString());
+    }
+  }
+
+  /*Validaciones*/
   bool value = true;
 
   static final RegExp _emailRegExp = RegExp(
@@ -70,11 +94,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         ),
                         TextFormField(
+                          controller: nombre,
                           decoration: InputDecoration(
                             hintText: 'Ingresa tu nombre',
                           ),
                             validator: (value){
-
                               if(value!.isEmpty){
                                 return "Ingresar nombre";
                               }else{
@@ -102,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         ),
                         TextFormField(
+                            controller: correo,
                           decoration: InputDecoration(
                             hintText: 'Ingresa tu correo',
                           ),
@@ -134,10 +159,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         ),
                         TextFormField(
+                            controller: contrasenia,
                           decoration: InputDecoration(
                               hintText: 'Ingresa tu contraseña'),
                             validator: (value){
-
                               if(value!.isEmpty){
                                 return "Ingresar contraseña";
                               }
@@ -167,9 +192,15 @@ class _RegisterPageState extends State<RegisterPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-                              if(_formKey.currentState!.validate()){
+                              /*if(_formKey.currentState!.validate()){
                                 Navigator.pushNamed(context, '/home');
-                              }
+                              }*/
+                              print("datos:\n");
+                              print(nombre.text);
+                              print(correo.text);
+                              print(contrasenia.text);
+                              registroUsuraio();
+                              print("usuario registrado");
                             },
                             child: const Text('Registrar'),
                           ),
