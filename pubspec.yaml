@@ -37,6 +37,7 @@ dependencies:
   table_calendar: ^3.0.6
   image_picker: ^0.8.4+10
   carousel_slider: ^4.1.1
+  firebase_core: ^1.17.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,9 @@ flutter:
   assets:
     - assets/img_busqueda.jpg
     - assets/text_encontrado.jpg
+    - assets/img1.jpg
+    - assets/img2.jpg
+    - assets/img3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

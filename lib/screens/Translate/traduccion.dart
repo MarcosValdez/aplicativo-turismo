@@ -1,3 +1,5 @@
+import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
+import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:flutter/material.dart';
 
 class traduccion extends StatefulWidget{
@@ -118,13 +120,19 @@ class _traduccionState extends State<traduccion>{
   Widget btn_options(){
     return Container(
       child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              btn_guardar(),
-              btn_return()
-            ],
-          )
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                btn_guardar(),
+                btn_rep(),
+              ],
+            ),
+            btn_return()
+          ],
+        ),
       ),
     );
   }
@@ -132,12 +140,15 @@ class _traduccionState extends State<traduccion>{
   Widget btn_guardar(){
     return Container(
       width: 150,
-      height: 60,
+      height: 70,
       child: ButtonBar(
         children: [
           ElevatedButton.icon(
             onPressed: (){
-
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => biblioteca())
+              );
             },
             icon: Icon(Icons.save),
             label: Text('Guardar Traducción', textAlign: TextAlign.center),
@@ -146,7 +157,23 @@ class _traduccionState extends State<traduccion>{
       )
     );
   }
-
+  Widget btn_rep(){
+    return Container(
+        width: 150,
+        height: 70,
+        child: ButtonBar(
+          children: [
+            ElevatedButton.icon(
+              onPressed: (){
+                Navigator.popUntil(context, ModalRoute.withName('/home/img_selecc'));
+              },
+              icon: Icon(Icons.refresh),
+              label: Text('Seleccionar otra imagen', textAlign: TextAlign.center),
+            ),
+          ],
+        )
+    );
+  }
   Widget btn_return(){
     return Container(
       width: 150,
@@ -155,10 +182,10 @@ class _traduccionState extends State<traduccion>{
         children: [
           ElevatedButton.icon(
             onPressed: (){
-              Navigator.pop(context);
+              Navigator.popUntil(context, ModalRoute.withName('/home'));
             },
             icon: Icon(Icons.assignment_return),
-            label: Text('Tomar otra foto', textAlign: TextAlign.center),
+            label: Text('Volver al menú', textAlign: TextAlign.center),
           ),
         ],
       )

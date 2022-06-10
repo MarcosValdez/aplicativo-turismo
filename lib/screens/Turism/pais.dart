@@ -1,3 +1,4 @@
+import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
 import 'package:flutter/material.dart';
 
 class pais extends StatefulWidget{
@@ -47,9 +48,10 @@ class _paisState extends State<pais> {
               borderRadius: BorderRadius.circular(30.0)
           ),
           onPressed: ()=>{
-            // use pageroute para lanzar a otra ventana
-            Navigator.pop(context),
-            print("BOTON: " +texto)
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => lugarTuristico()),
+            ),
           },
         )
     );

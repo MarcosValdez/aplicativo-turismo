@@ -1,3 +1,4 @@
+import 'package:aplicativo_turismo/screens/Turism/pais.dart';
 import 'package:flutter/material.dart';
 
 
@@ -57,12 +58,10 @@ class _continenteState extends State<continente> {
               borderRadius: BorderRadius.circular(30.0)
           ),
           onPressed: ()=>{
-            // use pageroute para lanzar a otra ventana
-            /*Navigator.push(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => pais()),
-            ),*/
-            print("BOTON: " +texto)
+            ),
           },
         )
     );

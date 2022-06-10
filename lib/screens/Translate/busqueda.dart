@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:aplicativo_turismo/traduccion.dart';
+import 'package:aplicativo_turismo/screens/Translate/traduccion.dart';
 
 class busqueda extends StatefulWidget{
   @override
