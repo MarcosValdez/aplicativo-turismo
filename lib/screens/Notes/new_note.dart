@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,7 @@ class newnotePage extends StatefulWidget {
 }
 class _notesState extends State<newnotePage>{
   TextEditingController txt_nota = TextEditingController();
-
+  final correoPrueba = "marco@gmail.com";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,9 +95,11 @@ class _notesState extends State<newnotePage>{
 
   guardarNota() async{
     try{
-      await FirebaseFirestore.instance.collection('Note').doc().set(
+      final doc = FirebaseFirestore.instance.collection('Note').doc();
+      await doc.set(
           {
-            "correo": "frank@gmail.com",
+            "id": doc.id,
+            "correo": correoPrueba,
             "text": txt_nota.text,
           }
       );

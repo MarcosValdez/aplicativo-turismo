@@ -25,6 +25,7 @@ class _menuState extends State<menu> {
               btn_biblio(),
               btn_tur(),
               btn_note(),
+              btn_newnote(),
               btn_cal()
             ],
           ),
@@ -96,6 +97,23 @@ class _menuState extends State<menu> {
           },
           icon: Icon(Icons.travel_explore),
           label: Text('Notas', textAlign: TextAlign.center),
+        )
+    );
+  }
+  Widget btn_newnote(){
+    return Container(
+        margin: EdgeInsets.only(top: 30),
+        width: 150,
+        height: 40,
+        child: ElevatedButton.icon(
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => newnotePage())
+            );
+          },
+          icon: Icon(Icons.travel_explore),
+          label: Text('nueva nota', textAlign: TextAlign.center),
         )
     );
   }
