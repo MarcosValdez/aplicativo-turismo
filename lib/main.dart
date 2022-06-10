@@ -1,4 +1,4 @@
-import 'package:aplicativo_turismo/screens/register.dart';
+import 'package:aplicativo_turismo/screens/calendar_modal.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
+      home: Calendar(),
     );
   }
 }
