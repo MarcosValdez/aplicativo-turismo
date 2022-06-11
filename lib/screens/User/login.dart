@@ -1,6 +1,8 @@
 import 'package:aplicativo_turismo/screens/User/register.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +11,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool valuebox = true;
+  bool _passwordVisible = false;
+
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
+
+  String? errorMessage;
 
   static final RegExp _emailRegExp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
@@ -17,6 +27,10 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _esEmail(String str) {
     return _emailRegExp.hasMatch(str.toLowerCase());
+  }
+
+  void initState() {
+    _passwordVisible = false;
   }
 
   @override
@@ -62,18 +76,23 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'Ingresa tu correo',
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Ingrese correo";
-                              } else {
-                                if (!_esEmail(value.toString())) {
-                                  return "Email invalido";
-                                }
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            hintText: 'Ingresa tu correo',
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Ingrese correo";
+                            } else {
+                              if (!_esEmail(value.toString())) {
+                                return "Email invalido";
                               }
-                            }),
+                            }
+                          },
+                          onSaved: (value) {
+                            emailController.text = value!;
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -92,13 +111,35 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         TextFormField(
-                            decoration: InputDecoration(
-                                hintText: 'Ingresa tu contraseña'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Ingrese contraseña";
-                              }
-                            }),
+                          controller: passwordController,
+                          obscureText: !_passwordVisible,
+                          decoration: InputDecoration(
+                            hintText: 'Ingresa tu contraseña',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Ingrese contraseña";
+                            }
+                          },
+                          onSaved: (value) {
+                            passwordController.text = value!;
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -137,11 +178,8 @@ class _LoginPageState extends State<LoginPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text("accesando al sistema")));
-                                Navigator.pushNamed(context, '/home');
-                              }
+                              signIn(emailController.text,
+                                  passwordController.text);
                             },
                             child: const Text('Ingresar'),
                           ),
@@ -181,5 +219,45 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => {
+                  Fluttertoast.showToast(msg: "Accediendo"),
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => menu())),
+                });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "El email no tiene el formato correcto.";
+
+            break;
+          case "wrong-password":
+            errorMessage = "Contraseña incorrecta.";
+            break;
+          case "user-not-found":
+            errorMessage = "Email no registrado.";
+            break;
+          case "user-disabled":
+            errorMessage = "Usuario deshabilitado.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Demasiadas peticiones";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Operacion no permitida.";
+            break;
+          default:
+            errorMessage = "Ha ocurrido un error desconocido.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
   }
 }

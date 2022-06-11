@@ -1,6 +1,8 @@
 import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
+import 'package:aplicativo_turismo/screens/Notes/new_note.dart';
+import 'package:aplicativo_turismo/screens/Notes/view_notes.dart';
 import 'package:flutter/material.dart';
 import 'Translate/imagen.dart';
 
@@ -18,7 +20,14 @@ class _menuState extends State<menu> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [btn_trad(), btn_biblio(), btn_tur(), btn_cal()],
+            children: [
+              btn_trad(),
+              btn_biblio(),
+              btn_tur(),
+              btn_note(),
+              btn_newnote(),
+              btn_cal()
+            ],
           ),
         ),
       ),
@@ -66,6 +75,36 @@ class _menuState extends State<menu> {
           },
           icon: Icon(Icons.travel_explore),
           label: Text('Informacion turistica', textAlign: TextAlign.center),
+        ));
+  }
+
+  Widget btn_note() {
+    return Container(
+        margin: EdgeInsets.only(top: 30),
+        width: 150,
+        height: 40,
+        child: ElevatedButton.icon(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => notePage()));
+          },
+          icon: Icon(Icons.travel_explore),
+          label: Text('Notas', textAlign: TextAlign.center),
+        ));
+  }
+
+  Widget btn_newnote() {
+    return Container(
+        margin: EdgeInsets.only(top: 30),
+        width: 150,
+        height: 40,
+        child: ElevatedButton.icon(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => newnotePage()));
+          },
+          icon: Icon(Icons.travel_explore),
+          label: Text('nueva nota', textAlign: TextAlign.center),
         ));
   }
 
