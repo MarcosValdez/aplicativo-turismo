@@ -9,8 +9,11 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+
+
 class _LoginPageState extends State<LoginPage> {
   bool valuebox = true;
+  bool  _passwordVisible = false;
 
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
@@ -26,6 +29,10 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _esEmail(String str){
     return _emailRegExp.hasMatch(str.toLowerCase());
+  }
+
+  void initState() {
+    _passwordVisible = false;
   }
 
   @override
@@ -104,8 +111,25 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           controller: passwordController,
+                          obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                              hintText: 'Ingresa tu contraseña'),
+                              hintText: 'Ingresa tu contraseña',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                          ),
                             validator: (value){
                               if(value!.isEmpty){
                                 return "Ingrese contraseña";

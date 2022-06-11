@@ -18,16 +18,12 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   final _auth = FirebaseAuth.instance;
-
+  bool  _passwordVisible = false;
   String? errorMessage;
 
   final TextEditingController nombre = TextEditingController();
   final TextEditingController correo = TextEditingController();
   final TextEditingController contrasenia = TextEditingController();
-
-
-
-
 
   static final RegExp _emailRegExp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
@@ -43,6 +39,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool _nombre(String str){
     return _nombreRegExp.hasMatch(str.toLowerCase());
+  }
+
+  void initState() {
+    _passwordVisible = false;
   }
 
   @override
@@ -162,9 +162,26 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         ),
                         TextFormField(
-                            controller: contrasenia,
+                          controller: contrasenia,
+                          obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                              hintText: 'Ingresa tu contraseña'),
+                              hintText: 'Ingresa tu contraseña',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                          ),
                             validator: (value){
                               if(value!.isEmpty){
                                 return "Ingresar contraseña";
@@ -262,7 +279,7 @@ class _RegisterPageState extends State<RegisterPage> {
           default:
             errorMessage = "Ha ocurrido un error desconocido.";
         }
-        Fluttertoast.showToast(msg: errorMessage!);
+        Fluttertoast.showToast(msg: errorMessage!, timeInSecForIosWeb: 3);
         print(error.code);
       }
     }
@@ -282,7 +299,7 @@ class _RegisterPageState extends State<RegisterPage> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Registro realizado con exito ");
+    Fluttertoast.showToast(msg: "Registro realizado con exito ",timeInSecForIosWeb: 2);
 
     Navigator.pushAndRemoveUntil(
         (context),
