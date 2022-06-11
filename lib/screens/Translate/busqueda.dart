@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:aplicativo_turismo/screens/Translate/traduccion.dart';
 
-class busqueda extends StatefulWidget{
+class busqueda extends StatefulWidget {
   @override
   _busquedaState createState() => _busquedaState();
 }
 
-class _busquedaState extends State<busqueda>{
+class _busquedaState extends State<busqueda> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('Busqueda'),
-      ),
+      ),*/
       backgroundColor: Colors.black87,
       body: Container(
         child: Center(
@@ -29,19 +29,20 @@ class _busquedaState extends State<busqueda>{
       ),
     );
   }
+
   Widget imagen_principal() {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.white,
-          width: 10
-        )
+      decoration:
+          BoxDecoration(border: Border.all(color: Colors.white, width: 10)),
+      child: Image.asset(
+        'assets/img_busqueda.jpg',
+        height: 400,
       ),
-      child: Image.asset('assets/img_busqueda.jpg', height: 400,),
     );
   }
-  Widget texto_busqueda(){
+
+  Widget texto_busqueda() {
     return Text(
       'Buscando Texto',
       style: TextStyle(
@@ -53,7 +54,7 @@ class _busquedaState extends State<busqueda>{
   }
 
   //Para pruebas
-  Widget btn_siguiente(){
+  Widget btn_siguiente() {
     return FlatButton(
       child: Text(
         'Siguiente Prototipo',
@@ -63,11 +64,9 @@ class _busquedaState extends State<busqueda>{
           fontSize: 10,
         ),
       ),
-      onPressed: (){
+      onPressed: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => traduccion())
-        );
+            context, MaterialPageRoute(builder: (context) => traduccion()));
       },
     );
   }

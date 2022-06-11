@@ -30,13 +30,13 @@ class _CalendarModalState extends State<CalendarModal> {
                     const Card(
                         // color: Colors.grey,
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: TextField(
-                            maxLines: 8, //or null
-                            decoration: InputDecoration.collapsed(
-                                hintText: "Escribe tu recordatorio"),
-                          ),
-                        )),
+                      padding: EdgeInsets.all(8.0),
+                      child: TextField(
+                        maxLines: 8, //or null
+                        decoration: InputDecoration.collapsed(
+                            hintText: "Escribe tu recordatorio"),
+                      ),
+                    )),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 0),

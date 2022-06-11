@@ -9,23 +9,19 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   TextEditingController nombre = TextEditingController();
   TextEditingController correo = TextEditingController();
   TextEditingController contrasenia = TextEditingController();
 
-
-  registroUsuraio() async{
-    try{
-      await FirebaseFirestore.instance.collection('User').doc().set(
-        {
-          "nombre": nombre.text,
-          "correo": correo.text,
-          "contrasenia": contrasenia.text
-        }
-      );
-    }catch(e){
-      print("ERRO...."+ e.toString());
+  registroUsuraio() async {
+    try {
+      await FirebaseFirestore.instance.collection('User').doc().set({
+        "nombre": nombre.text,
+        "correo": correo.text,
+        "contrasenia": contrasenia.text
+      });
+    } catch (e) {
+      print("ERRO...." + e.toString());
     }
   }
 
@@ -35,16 +31,15 @@ class _RegisterPageState extends State<RegisterPage> {
   static final RegExp _emailRegExp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
 
-  static final RegExp _nombreRegExp = RegExp(
-      r"^[a-zA-Z].{2,33}$");
+  static final RegExp _nombreRegExp = RegExp(r"^[a-zA-Z].{2,33}$");
 
   final _formKey = GlobalKey<FormState>();
 
-  bool _esEmail(String str){
+  bool _esEmail(String str) {
     return _emailRegExp.hasMatch(str.toLowerCase());
   }
 
-  bool _nombre(String str){
+  bool _nombre(String str) {
     return _nombreRegExp.hasMatch(str.toLowerCase());
   }
 
@@ -53,12 +48,10 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.black38,
       body: Container(
-
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.grey),
         padding: const EdgeInsets.all(30),
         margin: const EdgeInsets.all(30),
-
         child: Form(
           key: _formKey,
           child: Column(
@@ -94,20 +87,19 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         ),
                         TextFormField(
-                          controller: nombre,
-                          decoration: InputDecoration(
-                            hintText: 'Ingresa tu nombre',
-                          ),
-                            validator: (value){
-                              if(value!.isEmpty){
+                            controller: nombre,
+                            decoration: InputDecoration(
+                              hintText: 'Ingresa tu nombre',
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
                                 return "Ingresar nombre";
-                              }else{
-                                if(!_nombre(value.toString())){
+                              } else {
+                                if (!_nombre(value.toString())) {
                                   return "Nombre extenso";
                                 }
                               }
-                            }
-                        ),
+                            }),
                       ],
                     ),
                   ),
@@ -127,20 +119,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         TextFormField(
                             controller: correo,
-                          decoration: InputDecoration(
-                            hintText: 'Ingresa tu correo',
-                          ),
-                            validator: (value){
-
-                              if(value!.isEmpty){
+                            decoration: InputDecoration(
+                              hintText: 'Ingresa tu correo',
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
                                 return "Ingresar correo";
-                              }else{
-                                if(!_esEmail(value.toString())){
+                              } else {
+                                if (!_esEmail(value.toString())) {
                                   return "Correo invalido";
                                 }
                               }
-                            }
-                        ),
+                            }),
                       ],
                     ),
                   ),
@@ -160,14 +150,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         TextFormField(
                             controller: contrasenia,
-                          decoration: InputDecoration(
-                              hintText: 'Ingresa tu contraseña'),
-                            validator: (value){
-                              if(value!.isEmpty){
+                            decoration: InputDecoration(
+                                hintText: 'Ingresa tu contraseña'),
+                            validator: (value) {
+                              if (value!.isEmpty) {
                                 return "Ingresar contraseña";
                               }
-                            }
-                        ),
+                            }),
                       ],
                     ),
                   ),

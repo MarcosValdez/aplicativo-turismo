@@ -1,15 +1,12 @@
 import 'package:aplicativo_turismo/screens/Turism/pais.dart';
 import 'package:flutter/material.dart';
 
-
-class continente extends StatefulWidget{
+class continente extends StatefulWidget {
   @override
   _continenteState createState() => _continenteState();
-
 }
 
 class _continenteState extends State<continente> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +20,7 @@ class _continenteState extends State<continente> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _boton("America")
-              ],
+              children: [_boton("America")],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,20 +45,24 @@ class _continenteState extends State<continente> {
         height: 90,
         width: 250,
         child: RaisedButton(
-          child:Text(texto, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25.0),),
+          child: Text(
+            texto,
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0),
+          ),
           color: Colors.blue,
           elevation: 5,
           padding: EdgeInsets.all(30),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0)
-          ),
-          onPressed: ()=>{
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+          onPressed: () => {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => pais()),
             ),
           },
-        )
-    );
+        ));
   }
 }

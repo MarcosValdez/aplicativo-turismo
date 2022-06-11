@@ -26,9 +26,9 @@ class _lugarTuristicoState extends State<lugarTuristico> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text('Sitios Turisticos - Perú'),
-      ),
+      ),*/
       backgroundColor: Colors.black87,
       body: Center(
         child: Padding(
@@ -49,19 +49,28 @@ class _lugarTuristicoState extends State<lugarTuristico> {
                             Text(
                               "${Places[0]}",
                               style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white,),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                              ),
                             ),
                           if (i == 'assets/img2.jpg')
                             Text(
                               "${Places[1]}",
                               style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white,),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                              ),
                             ),
                           if (i == 'assets/img3.jpg')
                             Text(
                               "${Places[2]}",
                               style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white,),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                              ),
                             ),
                           Image.asset(i),
                           SizedBox(height: 20),
@@ -71,9 +80,10 @@ class _lugarTuristicoState extends State<lugarTuristico> {
                                   left: 25.0, right: 25.0),
                               child: Text("${Desc[0]}",
                                   style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.white,),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                  ),
                                   textAlign: TextAlign.center),
                             ),
                           if (i == 'assets/img2.jpg')
@@ -82,9 +92,10 @@ class _lugarTuristicoState extends State<lugarTuristico> {
                                   left: 25.0, right: 25.0),
                               child: Text("${Desc[1]}",
                                   style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.white,),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                  ),
                                   textAlign: TextAlign.center),
                             ),
                           if (i == 'assets/img3.jpg')
@@ -93,9 +104,10 @@ class _lugarTuristicoState extends State<lugarTuristico> {
                                   left: 25.0, right: 25.0),
                               child: Text("${Desc[2]}",
                                   style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.white,),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                  ),
                                   textAlign: TextAlign.center),
                             ),
                         ],

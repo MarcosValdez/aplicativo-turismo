@@ -15,14 +15,19 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  bool _esEmail(String str){
+  bool _esEmail(String str) {
     return _emailRegExp.hasMatch(str.toLowerCase());
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
+      key: _formKey,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.grey),
+        padding: const EdgeInsets.all(30),
+        margin: const EdgeInsets.all(30),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,30 +53,27 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         Row(
-                          children: const<Widget> [
+                          children: const <Widget>[
                             Text(
                               'Email',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
-
                           ],
                         ),
                         TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Ingresa tu correo',
-                          ),
-                            validator: (value){
-
-                              if(value!.isEmpty){
+                            decoration: InputDecoration(
+                              hintText: 'Ingresa tu correo',
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
                                 return "Ingrese correo";
-                              }else{
-                                if(!_esEmail(value.toString())){
+                              } else {
+                                if (!_esEmail(value.toString())) {
                                   return "Email invalido";
                                 }
                               }
-                            }
-                        ),
+                            }),
                       ],
                     ),
                   ),
@@ -90,14 +92,13 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         TextFormField(
-                          decoration: InputDecoration(
-                              hintText: 'Ingresa tu contraseña'),
-                            validator: (value){
-                              if(value!.isEmpty){
+                            decoration: InputDecoration(
+                                hintText: 'Ingresa tu contraseña'),
+                            validator: (value) {
+                              if (value!.isEmpty) {
                                 return "Ingrese contraseña";
                               }
-                            }
-                        ),
+                            }),
                       ],
                     ),
                   ),
@@ -136,10 +137,9 @@ class _LoginPageState extends State<LoginPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-                              if(_formKey.currentState!.validate()){
-                                Scaffold.of(context).showSnackBar(
-                                    SnackBar(content: Text("accesando al sistema"))
-                                );
+                              if (_formKey.currentState!.validate()) {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("accesando al sistema")));
                                 Navigator.pushNamed(context, '/home');
                               }
                             },
@@ -168,8 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => RegisterPage())
-                      );
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage()));
                       //Navigator.pop(context);
                     },
                     child: const Text('Registrar'),
@@ -179,6 +179,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
+      ),
     );
   }
 }

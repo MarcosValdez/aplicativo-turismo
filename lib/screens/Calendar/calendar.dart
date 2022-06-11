@@ -14,9 +14,9 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: const Text('Calendario'),
-      ),
+      ),*/
       body: TableCalendar(
         firstDay: DateTime(1999),
         lastDay: DateTime(2050),

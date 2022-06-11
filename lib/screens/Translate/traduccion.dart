@@ -2,12 +2,12 @@ import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:flutter/material.dart';
 
-class traduccion extends StatefulWidget{
+class traduccion extends StatefulWidget {
   @override
   _traduccionState createState() => _traduccionState();
 }
 
-class _traduccionState extends State<traduccion>{
+class _traduccionState extends State<traduccion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,81 +29,71 @@ class _traduccionState extends State<traduccion>{
           ),
         ),
       ),
-
     );
   }
-  Widget txt_header(){
+
+  Widget txt_header() {
     return Container(
       margin: EdgeInsets.all(50),
       child: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              txt_main('Texto Encontrado', 20),
-            ],
-          )
-      ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          txt_main('Texto Encontrado', 20),
+        ],
+      )),
     );
   }
 
-  Widget txt_traduccion(){
+  Widget txt_traduccion() {
     return Container(
       margin: EdgeInsets.all(50),
       child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            txt_idmoriginal(),
-            txt_idmobjetivo()
-          ],
-        )
-      ),
-    );
-  }
-  
-  Widget txt_idmoriginal(){
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            txt_main('Idioma Original',14),
-            txt_main('Ruso',14),
-            txt_main('CTOП',20),
-          ],
-        )
-      )
+          child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [txt_idmoriginal(), txt_idmobjetivo()],
+      )),
     );
   }
 
-  Widget txt_idmobjetivo(){
+  Widget txt_idmoriginal() {
     return Container(
         child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                txt_main('Español',14),
-                txt_main('DETENGASE',20),
-              ],
-            )
-        )
-    );
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        txt_main('Idioma Original', 14),
+        txt_main('Ruso', 14),
+        txt_main('CTOП', 20),
+      ],
+    )));
   }
 
-  Widget img_encontrado(){
+  Widget txt_idmobjetivo() {
+    return Container(
+        child: Center(
+            child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        txt_main('Español', 14),
+        txt_main('DETENGASE', 20),
+      ],
+    )));
+  }
+
+  Widget img_encontrado() {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.white,
-              width: 10
-          )
+      decoration:
+          BoxDecoration(border: Border.all(color: Colors.white, width: 10)),
+      child: Image.asset(
+        'assets/text_encontrado.jpg',
+        height: 100,
       ),
-      child: Image.asset('assets/text_encontrado.jpg', height: 100,),
     );
   }
 
-  Widget txt_main(String txt, double size){
+  Widget txt_main(String txt, double size) {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Text(
@@ -117,10 +107,10 @@ class _traduccionState extends State<traduccion>{
     );
   }
 
-  Widget btn_options(){
+  Widget btn_options() {
     return Container(
       child: Center(
-        child:Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
@@ -137,58 +127,57 @@ class _traduccionState extends State<traduccion>{
     );
   }
 
-  Widget btn_guardar(){
-    return Container(
-      width: 150,
-      height: 70,
-      child: ButtonBar(
-        children: [
-          ElevatedButton.icon(
-            onPressed: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => biblioteca())
-              );
-            },
-            icon: Icon(Icons.save),
-            label: Text('Guardar Traducción', textAlign: TextAlign.center),
-          ),
-        ],
-      )
-    );
-  }
-  Widget btn_rep(){
+  Widget btn_guardar() {
     return Container(
         width: 150,
         height: 70,
         child: ButtonBar(
           children: [
             ElevatedButton.icon(
-              onPressed: (){
-                Navigator.popUntil(context, ModalRoute.withName('/home/img_selecc'));
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => biblioteca()));
               },
-              icon: Icon(Icons.refresh),
-              label: Text('Seleccionar otra imagen', textAlign: TextAlign.center),
+              icon: Icon(Icons.save),
+              label: Text('Guardar Traducción', textAlign: TextAlign.center),
             ),
           ],
-        )
-    );
+        ));
   }
-  Widget btn_return(){
+
+  Widget btn_rep() {
     return Container(
-      width: 150,
-      height: 60,
-      child: ButtonBar(
-        children: [
-          ElevatedButton.icon(
-            onPressed: (){
-              Navigator.popUntil(context, ModalRoute.withName('/home'));
-            },
-            icon: Icon(Icons.assignment_return),
-            label: Text('Volver al menú', textAlign: TextAlign.center),
-          ),
-        ],
-      )
-    );
+        width: 150,
+        height: 70,
+        child: ButtonBar(
+          children: [
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.popUntil(
+                    context, ModalRoute.withName('/home/img_selecc'));
+              },
+              icon: Icon(Icons.refresh),
+              label:
+                  Text('Seleccionar otra imagen', textAlign: TextAlign.center),
+            ),
+          ],
+        ));
+  }
+
+  Widget btn_return() {
+    return Container(
+        width: 150,
+        height: 60,
+        child: ButtonBar(
+          children: [
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+              },
+              icon: Icon(Icons.assignment_return),
+              label: Text('Volver al menú', textAlign: TextAlign.center),
+            ),
+          ],
+        ));
   }
 }

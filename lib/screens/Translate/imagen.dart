@@ -1,5 +1,5 @@
 import 'dart:io';
-import'package:aplicativo_turismo/screens/Translate/busqueda.dart';
+import 'package:aplicativo_turismo/screens/Translate/busqueda.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -33,15 +33,16 @@ class imagen extends StatelessWidget {
                           "Imagen en galería",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: Colors.white70, fontWeight: FontWeight.bold),
+                              color: Colors.white70,
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          _handleURLButtonPress(context, ImageSourceType.gallery);
+                          _handleURLButtonPress(
+                              context, ImageSourceType.gallery);
                         },
                       ),
                     ],
-                  )
-              ),
+                  )),
               Container(
                   width: 150,
                   height: 60,
@@ -53,23 +54,21 @@ class imagen extends StatelessWidget {
                           "Desde la camara",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: Colors.white70, fontWeight: FontWeight.bold),
-
+                              color: Colors.white70,
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          _handleURLButtonPress(context, ImageSourceType.camera);
+                          _handleURLButtonPress(
+                              context, ImageSourceType.camera);
                         },
                       ),
                     ],
-                  )
-              ),
+                  )),
             ],
           ),
         ));
   }
 }
-
-
 
 class ImageFromGalleryEx extends StatefulWidget {
   final type;
@@ -98,7 +97,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+          backgroundColor: Colors.black,
           title: Text(type == ImageSourceType.camera
               ? "Desde la camara"
               : "Imagen de galeria")),
@@ -115,24 +114,24 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                     ? ImageSource.camera
                     : ImageSource.gallery;
                 XFile image = await imagePicker.pickImage(
-                    source: source, imageQuality: 50, preferredCameraDevice: CameraDevice.front);
+                    source: source,
+                    imageQuality: 50,
+                    preferredCameraDevice: CameraDevice.front);
                 setState(() {
                   _image = File(image.path);
                 });
               },
-                child: Column(
-                  children: [
-                    img_cam(),
-                    btn_usar()
-                  ],
-                ),
+              child: Column(
+                children: [img_cam(), btn_usar()],
+              ),
             ),
           )
         ],
       ),
     );
   }
-  Widget txt_main(String txt, double size){
+
+  Widget txt_main(String txt, double size) {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Text(
@@ -146,53 +145,48 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
     );
   }
 
-  Widget btn_usar(){
+  Widget btn_usar() {
     return Container(
         width: 150,
         height: 60,
         child: ButtonBar(
           children: [
             ElevatedButton.icon(
-              onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => busqueda())
-                );
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => busqueda()));
               },
               icon: Icon(Icons.camera),
               label: Text('Usar Imagen', textAlign: TextAlign.center),
             ),
           ],
-        )
-    );
+        ));
   }
 
-  Widget img_cam(){
+  Widget img_cam() {
     return Container(
       width: 200,
       height: 200,
-      decoration: BoxDecoration(
-          color: Colors.blue),
+      decoration: BoxDecoration(color: Colors.blue),
       child: _image != null
           ? Image.file(
-        _image,
-        width: 200.0,
-        height: 200.0,
-        fit: BoxFit.fitHeight,
-      )
+              _image,
+              width: 200.0,
+              height: 200.0,
+              fit: BoxFit.fitHeight,
+            )
           : Container(
-        decoration: BoxDecoration(
-            color: Colors.blue),
-        width: 200,
-        height: 200,
-        child: Icon(type == ImageSourceType.camera
-            ? Icons.camera_alt
-            : Icons.file_upload,
-          size: 50,
-          color: Colors.grey[800],
-        ),
-      ),
+              decoration: BoxDecoration(color: Colors.blue),
+              width: 200,
+              height: 200,
+              child: Icon(
+                type == ImageSourceType.camera
+                    ? Icons.camera_alt
+                    : Icons.file_upload,
+                size: 50,
+                color: Colors.grey[800],
+              ),
+            ),
     );
   }
 }
-
