@@ -1,6 +1,7 @@
 import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
 import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
 import 'package:aplicativo_turismo/screens/Translate/busqueda.dart';
+import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
