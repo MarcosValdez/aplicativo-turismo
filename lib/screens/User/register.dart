@@ -1,7 +1,14 @@
+
+
+import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../Model/User/user_model.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -10,27 +17,17 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
 
-  TextEditingController nombre = TextEditingController();
-  TextEditingController correo = TextEditingController();
-  TextEditingController contrasenia = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+
+  String? errorMessage;
+
+  final TextEditingController nombre = TextEditingController();
+  final TextEditingController correo = TextEditingController();
+  final TextEditingController contrasenia = TextEditingController();
 
 
-  registroUsuraio() async{
-    try{
-      await FirebaseFirestore.instance.collection('User').doc().set(
-        {
-          "nombre": nombre.text,
-          "correo": correo.text,
-          "contrasenia": contrasenia.text
-        }
-      );
-    }catch(e){
-      print("ERRO...."+ e.toString());
-    }
-  }
 
-  /*Validaciones*/
-  bool value = true;
+
 
   static final RegExp _emailRegExp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
@@ -106,7 +103,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                   return "Nombre extenso";
                                 }
                               }
-                            }
+                            },
+                          onSaved: (value){
+                            nombre.text = value!;
+                          },
                         ),
                       ],
                     ),
@@ -139,7 +139,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                   return "Correo invalido";
                                 }
                               }
-                            }
+                            },
+                          onSaved: (value){
+                              correo.text = value!;
+                          },
                         ),
                       ],
                     ),
@@ -166,7 +169,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               if(value!.isEmpty){
                                 return "Ingresar contraseña";
                               }
-                            }
+                            },
+                          onSaved: (value){
+                              contrasenia.text = value!;
+                          },
                         ),
                       ],
                     ),
@@ -192,15 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-                              /*if(_formKey.currentState!.validate()){
-                                Navigator.pushNamed(context, '/home');
-                              }*/
-                              print("datos:\n");
-                              print(nombre.text);
-                              print(correo.text);
-                              print(contrasenia.text);
-                              registroUsuraio();
-                              print("usuario registrado");
+                              registroUsuario(correo.text, contrasenia.text);
                             },
                             child: const Text('Registrar'),
                           ),
@@ -236,5 +234,59 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+  void registroUsuario(String email, String password) async{
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e!.message);
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "El email no tiene el formato correcto.";
+
+            break;
+          case "user-disabled":
+            errorMessage = "Usuario deshabilitado.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Demasiadas peticiones";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Operacion no permitida.";
+            break;
+          default:
+            errorMessage = "Ha ocurrido un error desconocido.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
+  }
+  postDetailsToFirestore() async {
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel();
+
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.nombre = nombre.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Registro realizado con exito ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => menu()),
+            (route) => false);
   }
 }

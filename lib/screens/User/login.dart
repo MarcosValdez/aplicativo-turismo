@@ -1,6 +1,8 @@
 import 'package:aplicativo_turismo/screens/User/register.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +11,13 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool valuebox = true;
+
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
+
+  String? errorMessage;
 
   static final RegExp _emailRegExp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$");
@@ -58,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         TextFormField(
+                          controller: emailController,
                           decoration: InputDecoration(
                             hintText: 'Ingresa tu correo',
                           ),
@@ -70,7 +80,10 @@ class _LoginPageState extends State<LoginPage> {
                                   return "Email invalido";
                                 }
                               }
-                            }
+                            },
+                          onSaved: (value){
+                            emailController.text = value!;
+                          },
                         ),
                       ],
                     ),
@@ -90,13 +103,17 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         TextFormField(
+                          controller: passwordController,
                           decoration: InputDecoration(
                               hintText: 'Ingresa tu contraseña'),
                             validator: (value){
                               if(value!.isEmpty){
                                 return "Ingrese contraseña";
                               }
-                            }
+                            },
+                          onSaved: (value){
+                            passwordController.text = value!;
+                          },
                         ),
                       ],
                     ),
@@ -136,12 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
-                              if(_formKey.currentState!.validate()){
-                                Scaffold.of(context).showSnackBar(
-                                    SnackBar(content: Text("accesando al sistema"))
-                                );
-                                Navigator.pushNamed(context, '/home');
-                              }
+                              signIn(emailController.text, passwordController.text);
                             },
                             child: const Text('Ingresar'),
                           ),
@@ -180,5 +192,44 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
     );
+  }
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => {
+          Fluttertoast.showToast(msg: "Accediendo"),
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => menu())),
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "El email no tiene el formato correcto.";
+
+            break;
+          case "wrong-password":
+            errorMessage = "Contraseña incorrecta.";
+            break;
+          case "user-not-found":
+            errorMessage = "Email no registrado.";
+            break;
+          case "user-disabled":
+            errorMessage = "Usuario deshabilitado.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Demasiadas peticiones";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Operacion no permitida.";
+            break;
+          default:
+            errorMessage = "Ha ocurrido un error desconocido.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
   }
 }
