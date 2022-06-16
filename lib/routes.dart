@@ -2,6 +2,8 @@ import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
 import 'package:aplicativo_turismo/screens/Translate/busqueda.dart';
 import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
+import 'package:aplicativo_turismo/screens/menu.dart';
+import 'package:aplicativo_turismo/screens/principal.dart';
 import 'package:flutter/material.dart';
 
 class Routes extends StatelessWidget {
@@ -12,10 +14,11 @@ class Routes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> myList = [
-      LoginPage(),
+      Principal(),
       busqueda(),
       Calendar(),
-      const lugarTuristico()
+      const lugarTuristico(),
+
     ];
     return myList[index];
   }

@@ -1,36 +1,42 @@
+import 'package:aplicativo_turismo/BNavigation.dart';
+import 'package:aplicativo_turismo/routes.dart';
 import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
 import 'package:aplicativo_turismo/screens/Notes/new_note.dart';
 import 'package:aplicativo_turismo/screens/Notes/view_notes.dart';
 import 'package:flutter/material.dart';
-import 'Translate/imagen.dart';
 
-class menu extends StatefulWidget {
+class Menu extends StatefulWidget {
   @override
   _menuState createState() => _menuState();
 }
 
-class _menuState extends State<menu> {
+class _menuState extends State<Menu> {
+
+  int index = 0;
+  BNavigation? myBNB;
+
+  void initState(){
+    myBNB = BNavigation(currenIndex: (i){
+      setState((){
+        index = i;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              btn_trad(),
-              btn_biblio(),
-              btn_tur(),
-              btn_note(),
-              btn_newnote(),
-              btn_cal()
-            ],
-          ),
-        ),
+      appBar: AppBar(
+        title: Text('Grupo 01'),
       ),
+      backgroundColor: Colors.black87,
+      bottomNavigationBar: myBNB,
+
+      body: Routes(index: index),
+
     );
   }
 

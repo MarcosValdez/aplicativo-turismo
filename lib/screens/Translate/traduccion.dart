@@ -1,5 +1,4 @@
 import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
-import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
 
@@ -174,7 +173,7 @@ class _traduccionState extends State<traduccion> {
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => menu()));
+                    MaterialPageRoute(builder: (context) => Menu()));
               },
               icon: Icon(Icons.assignment_return),
               label: Text('Volver al menú', textAlign: TextAlign.center),

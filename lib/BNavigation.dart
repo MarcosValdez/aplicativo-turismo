@@ -14,9 +14,7 @@ class BNavigation extends StatefulWidget{
 }
 
 class _BNavigatorState extends State<BNavigation> {
-
   int index = 0;
-  final screens = [LoginPage(), busqueda(), Calendar(), lugarTuristico(),];
 
   @override
   Widget build(BuildContext context) {

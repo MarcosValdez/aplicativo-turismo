@@ -229,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Accediendo"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => menu())),
+                      MaterialPageRoute(builder: (context) => Menu())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
