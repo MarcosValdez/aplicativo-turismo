@@ -1,4 +1,5 @@
 import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
+import 'package:aplicativo_turismo/screens/Turism/lugaresVert.dart';
 import 'package:flutter/material.dart';
 
 class pais extends StatefulWidget {
@@ -49,7 +50,7 @@ class _paisState extends State<pais> {
           onPressed: () => {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => lugarTuristico()),
+              MaterialPageRoute(builder: (context) => lugarTuristicoVert()),
             ),
           },
         ));

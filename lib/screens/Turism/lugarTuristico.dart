@@ -34,7 +34,10 @@ class _lugarTuristicoState extends State<lugarTuristico> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: CarouselSlider(
-            options: CarouselOptions(height: 520),
+            options: CarouselOptions(
+              height: 520,
+              //scrollDirection: Axis.vertical
+            ),
             items: ['assets/img1.jpg', 'assets/img2.jpg', 'assets/img3.jpg']
                 .map((i) {
               return Builder(builder: (BuildContext context) {
