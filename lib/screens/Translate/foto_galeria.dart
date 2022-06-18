@@ -21,7 +21,7 @@ class _ImagenState extends State<Imagen> {
   Future selImagen(op) async{
 
     // var pickedFile;
-
+    // Opcion de tomar foto o seleccionar desde galeria
     if(op == 1){
       pickedFile = await picker.getImage(source: ImageSource.camera);
     }else{
@@ -35,10 +35,11 @@ class _ImagenState extends State<Imagen> {
         print("No se selecciono una imagen");
       }
     });
-
+    // Cerrar al seleccionar
     Navigator.of(context).pop();
   }
 
+  // Upload image with a uuid in dir: imagenesTraduccion
   Future uploadFile() async{
     //Desea subir imagen?
     // final path = 'files/${pickedFile!.name}';
