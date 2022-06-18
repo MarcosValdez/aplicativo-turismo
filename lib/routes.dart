@@ -1,5 +1,6 @@
 import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
 import 'package:aplicativo_turismo/screens/Translate/busqueda.dart';
+import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
@@ -17,8 +18,7 @@ class Routes extends StatelessWidget {
       Principal(),
       busqueda(),
       Calendar(),
-      const lugarTuristico(),
-
+      continente(),
     ];
     return myList[index];
   }
