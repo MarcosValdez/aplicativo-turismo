@@ -46,179 +46,194 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text(
-                "Iniciar sesión",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Divider(
-                    height: 30,
-                    color: Colors.white,
-                    thickness: 1.5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 0.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const <Widget>[
-                            Text(
-                              'Email',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        TextFormField(
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            hintText: 'Ingresa tu correo',
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Ingrese correo";
-                            } else {
-                              if (!_esEmail(value.toString())) {
-                                return "Email invalido";
-                              }
-                            }
-                          },
-                          onSaved: (value) {
-                            emailController.text = value!;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 0.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Text(
-                              'Contraseña',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        TextFormField(
-                          controller: passwordController,
-                          obscureText: !_passwordVisible,
-                          decoration: InputDecoration(
-                            hintText: 'Ingresa tu contraseña',
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                // Based on passwordVisible state choose the icon
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Theme.of(context).primaryColorDark,
-                              ),
-                              onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Ingrese contraseña";
-                            }
-                          },
-                          onSaved: (value) {
-                            passwordController.text = value!;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: valuebox,
-                        onChanged: (bool? value) {
-                          this.valuebox = value!;
-                        },
-                      ),
-                      const Text(
-                        'Mantener abierta la sesión',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Stack(
-                        children: <Widget>[
-                          Positioned.fill(
-                            child: Container(
-                              decoration:
-                                  const BoxDecoration(color: Colors.blue),
-                            ),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 80),
-                              primary: Colors.white,
-                              textStyle: const TextStyle(fontSize: 20),
-                            ),
-                            onPressed: () {
-                              signIn(emailController.text,
-                                  passwordController.text);
-                            },
-                            child: const Text('Ingresar'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 20,
-                    color: Colors.white,
-                    thickness: 1.5,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    '¿No estas registrado?',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
-                      //Navigator.pop(context);
-                    },
-                    child: const Text('Registrar'),
-                  ),
-                ],
-              )
+              txt_blanco("Iniciar sesión", 30),
+              columna(),
             ],
           ),
         ),
       ),
     ));
+  }
+
+  Widget txt_blanco (String texto, double sz){
+    return Text(
+      texto,
+      style: TextStyle(fontSize: sz, color: Colors.white),
+    );
+  }
+
+  Widget columna(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        divider_blanco(),
+        email(),
+        contrasenia(),
+        mant_abierta(),
+        btn_ingresar(),
+        divider_blanco(),
+        sz_box(),
+        txt_blanco("¿No estás registrado?", 16),
+        btn_reg()
+      ],
+    );
+  }
+  
+  Widget email(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          vertical: 20.0, horizontal: 0.0),
+      child: Column(
+        children: [
+          Row(
+            children: <Widget>[
+              txt_blanco("Email", 16),
+            ],
+          ),
+          TextFormField(
+            controller: emailController,
+            decoration: InputDecoration(
+              hintText: 'Ingresa tu correo',
+            ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Ingrese correo";
+              } else {
+                if (!_esEmail(value.toString())) {
+                  return "Email invalido";
+                }
+              }
+            },
+            onSaved: (value) {
+              emailController.text = value!;
+            },
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget contrasenia(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          vertical: 20.0, horizontal: 0.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              txt_blanco("Contraseña", 16),
+            ],
+          ),
+          TextFormField(
+            controller: passwordController,
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: 'Ingresa tu contraseña',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  // Based on passwordVisible state choose the icon
+                  _passwordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () {
+                  // Update the state i.e. toogle the state of passwordVisible variable
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+              ),
+            ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Ingrese contraseña";
+              }
+            },
+            onSaved: (value) {
+              passwordController.text = value!;
+            },
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget mant_abierta(){
+    return Row(
+      children: [
+        Checkbox(
+          value: valuebox,
+          onChanged: (bool? value) {
+            this.valuebox = value!;
+          },
+        ),
+        txt_blanco("Mantener abierta la sesion", 16)
+      ],
+    );
+  }
+  
+  Widget btn_ingresar(){
+    return Padding(
+      padding:
+      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(4),
+        child: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Container(
+                decoration:
+                const BoxDecoration(color: Colors.blue),
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12, horizontal: 80),
+                primary: Colors.white,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                signIn(emailController.text,
+                    passwordController.text);
+              },
+              child: const Text('Ingresar'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget divider_blanco(){
+    return Divider(
+      height: 20,
+      color: Colors.white,
+      thickness: 1.5,
+    );
+  }
+
+  Widget sz_box(){
+    return SizedBox(
+      height: 10,
+    );
+  }
+
+  Widget btn_reg(){
+    return TextButton(
+      style: TextButton.styleFrom(
+        textStyle: const TextStyle(fontSize: 20),
+      ),
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterPage()));
+        //Navigator.pop(context);
+      },
+      child: const Text('Registrar'),
+    );
   }
 
   void signIn(String email, String password) async {
