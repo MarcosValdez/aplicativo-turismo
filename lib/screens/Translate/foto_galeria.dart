@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'package:uuid/uuid.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -12,10 +16,11 @@ class _ImagenState extends State<Imagen> {
 
   File? imagen;
   final picker = ImagePicker();
+  var pickedFile;
 
   Future selImagen(op) async{
 
-    var pickedFile;
+    // var pickedFile;
 
     if(op == 1){
       pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -24,20 +29,23 @@ class _ImagenState extends State<Imagen> {
     }
 
     setState((){
-      if(pickedFile != null)
-        imagen = File(pickedFile.path);
-      else{
+      if(pickedFile != null) {
+        imagen = File(pickedFile!.path);
+      }else{
         print("No se selecciono una imagen");
       }
     });
+
     Navigator.of(context).pop();
+  }
 
+  Future uploadFile() async{
     //Desea subir imagen?
-    final path = 'files/${pickedFile!.name}';
-    final file = File(pickedFile!.path!);
-    final ref = FirebaseStorage.instance.ref().child(path);
-    ref.putFile(file);
-
+    // final path = 'files/${pickedFile!.name}';
+    UploadTask updloadTask = FirebaseStorage.instance.ref().child('imagenesTraduccion').child(Uuid().v1()).putFile(imagen!);
+    TaskSnapshot taskSnapshot = await updloadTask;
+    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    log(downloadUrl);
   }
 
   opciones(context) {
@@ -120,7 +128,7 @@ class _ImagenState extends State<Imagen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Seleccionamos una Imagen'),
+          title: Text('Traduccion por Imagen'),
         ),
         backgroundColor: Colors.black87,
         body: ListView(children: [
@@ -133,6 +141,10 @@ class _ImagenState extends State<Imagen> {
                     opciones(context);
                   },
                   child: Text('Seleccionar imagen'),
+                ),
+                ElevatedButton(
+                  onPressed: uploadFile,
+                  child: Text('Cargar imagen'),
                 ),
                 SizedBox(
                   height: 30,
