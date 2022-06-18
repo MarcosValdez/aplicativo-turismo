@@ -2,8 +2,6 @@ import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:aplicativo_turismo/screens/User/login.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../Model/User/user_model.dart';
@@ -297,6 +295,6 @@ class _RegisterPageState extends State<RegisterPage> {
         msg: "Registro realizado con exito ", timeInSecForIosWeb: 2);
 
     Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => menu()), (route) => false);
+        MaterialPageRoute(builder: (context) => Menu()), (route) => false);
   }
 }

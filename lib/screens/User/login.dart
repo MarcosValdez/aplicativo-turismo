@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return Material(child: Form(
       key: _formKey,
       child: Container(
         decoration: BoxDecoration(
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   void signIn(String email, String password) async {
@@ -229,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Accediendo"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => menu())),
+                      MaterialPageRoute(builder: (context) => Menu())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
