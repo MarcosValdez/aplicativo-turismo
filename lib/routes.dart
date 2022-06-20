@@ -1,5 +1,6 @@
 import 'package:aplicativo_turismo/screens/Calendar/calendar.dart';
 import 'package:aplicativo_turismo/screens/Translate/busqueda.dart';
+import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
 import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
@@ -15,7 +16,8 @@ class Routes extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> myList = [
       Principal(),
-      busqueda(),
+      // busqueda(),
+      Imagen(),
       Calendar(),
       const lugarTuristico(),
 
