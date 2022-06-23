@@ -1,11 +1,13 @@
 import 'package:aplicativo_turismo/routes.dart';
 import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
+import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
+import 'color_constants.dart';
 import 'firebase_options.dart';
 
 // To use firebase
@@ -37,7 +39,15 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'AppTurismo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: ColorConstants.primaryColor,
+              secondary: ColorConstants.secondaryColor),
+          fontFamily: 'Georgia',
+
+          textTheme: const TextTheme(
+              titleLarge: TextStyle(fontSize: 36, fontStyle: FontStyle.italic),
+              bodySmall : TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
+          )
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -49,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         '/home': (context) => Menu(),
-        '/home/img_selecc': (context) => Imagen(),
+        '/home/img_selecc': (context) => imagen(),
       },
     );
   }
