@@ -1,3 +1,4 @@
+import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/User/register.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       key: _formKey,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.grey),
+            borderRadius: BorderRadius.circular(20), color: ColorConstants.fondoForms),
         padding: const EdgeInsets.all(30),
         margin: const EdgeInsets.all(30),
         child: Center(
@@ -135,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   _passwordVisible
                       ? Icons.visibility
                       : Icons.visibility_off,
-                  color: Theme.of(context).primaryColorDark,
+                  color: ColorConstants.primaryColor,
                 ),
                 onPressed: () {
                   // Update the state i.e. toogle the state of passwordVisible variable
@@ -167,6 +168,7 @@ class _LoginPageState extends State<LoginPage> {
           onChanged: (bool? value) {
             this.valuebox = value!;
           },
+          activeColor: ColorConstants.secondaryColor,
         ),
         txt_blanco("Mantener abierta la sesion", 16)
       ],
@@ -184,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
             Positioned.fill(
               child: Container(
                 decoration:
-                const BoxDecoration(color: Colors.blue),
+                BoxDecoration(color: ColorConstants.secondaryColor),
               ),
             ),
             TextButton(
