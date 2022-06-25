@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:aplicativo_turismo/routes.dart';
 import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
+import 'package:aplicativo_turismo/screens/principal.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -152,15 +154,7 @@ class _ImagenState extends State<Imagen> {
                   height: 30,
                 ),
                 imagen == null ? Center() : Image.file(imagen!),
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => idioma())
-                    );
-                  },
-                  child: Text('Biblioteca'),
-                ),
+
               ],
             ),
           )
