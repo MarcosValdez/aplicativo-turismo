@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:aplicativo_turismo/BNavigation.dart';
 import 'package:aplicativo_turismo/Model/User/user_model.dart';
@@ -57,7 +58,7 @@ class _menuState extends State<Menu> {
       appBar: AppBar(
         title: Text('Grupo 01'),
       ),
-      backgroundColor: Colors.black87,
+      backgroundColor: ColorConstants.lightBackground,
       bottomNavigationBar: myBNB,
 
       body: Routes(index: index, continentes: continentes)
@@ -70,7 +71,7 @@ class _menuState extends State<Menu> {
       height: 100,
       width: 100,
       margin: EdgeInsets.all(50),
-      child: Icon(Icons.person_rounded, color: Colors.blue, size: 100,),
+      child: Icon(Icons.person_rounded, color: ColorConstants.secondaryLightColor, size: 100,),
     );
   }
 

@@ -4,6 +4,8 @@ import 'package:aplicativo_turismo/screens/Turism/pais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../color_constants.dart';
+
 class continente extends StatefulWidget {
   late String tipo_continente;
   late List tipo_continente_todos;
@@ -46,11 +48,12 @@ class _continenteState extends State<continente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Destinos a visitar"),
+        backgroundColor: ColorConstants.secondaryColor,
+        title: Text("Destinos a visitar", style: Theme.of(context).textTheme.bodySmall?.merge(TextStyle(color: Colors.white))),
       ),
       backgroundColor: Colors.grey,
       body: Container(
-        color: Colors.grey,
+        color: ColorConstants.lightBackground,
         child: Form(
             key: _formKey,
             child: Column(
@@ -83,7 +86,7 @@ class _continenteState extends State<continente> {
                                     print(list);
                                     return
                                       Card(
-                                        color: Colors.grey,
+                                        color: ColorConstants.cards,
                                         child: ListTile(
                                           title: Text(list[index]['nombre']),
 
@@ -121,7 +124,7 @@ class _continenteState extends State<continente> {
     return  DropdownButtonFormField<String>(
       value: null,
       hint: Text("Seleccionar una opcion"),
-      dropdownColor: Colors.blue, //dropdown background color
+      dropdownColor: ColorConstants.primaryColor, //dropdown background color
       isExpanded: true, //make true to make width 100%
       items: widget.tipo_continente_todos.map((list) {
         print(list);
@@ -148,7 +151,7 @@ class _continenteState extends State<continente> {
         onPressed:(){
           _validar();
         },
-        color: Colors.blue,
+        color: ColorConstants.primaryColor,
         child: Text('Buscar', style: TextStyle(color: Colors.white))
     );
   }

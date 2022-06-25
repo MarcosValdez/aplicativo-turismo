@@ -12,4 +12,8 @@ class ColorConstants {
   static Color secondaryTextColor = const Color(0xFF000000);
 
   static Color fondoForms = const Color(0xFF91aac3);
+  static Color lightBackground = const Color(0xFFc8d1e1);
+  static Color darkBackground = const Color(0xFFc8d1e1);
+
+  static Color cards = const Color(0xFFa6b4cc);
 }

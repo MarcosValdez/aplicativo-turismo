@@ -1,11 +1,15 @@
 import 'dart:developer';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:uuid/uuid.dart';
+
+import '../../color_constants.dart';
+import '../menu.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -40,13 +44,38 @@ class _ImagenState extends State<Imagen> {
   }
 
   // Upload image with a uuid in dir: imagenesTraduccion
-  Future uploadFile() async{
+  Future uploadFile(BuildContext context) async{
     //Desea subir imagen?
     // final path = 'files/${pickedFile!.name}';
     UploadTask updloadTask = FirebaseStorage.instance.ref().child('imagenesTraduccion').child(Uuid().v1()).putFile(imagen!);
     TaskSnapshot taskSnapshot = await updloadTask;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     log(downloadUrl);
+    await _showMyDialog(context);
+  }
+
+  Widget _buildAlertDialog() {
+    return AlertDialog(
+      title: Text('Notificacion'),
+      content:
+      Text("La imagen se ha cargado con exito"),
+      actions: <Widget>[
+        FlatButton(
+            child: Text("Aceptar"),
+            textColor: Colors.blue,
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => Menu()));
+            }),
+      ],
+    );
+  }
+
+  Future<void> _showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (_) => _buildAlertDialog(),
+    );
   }
 
   opciones(context) {
@@ -128,10 +157,12 @@ class _ImagenState extends State<Imagen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text('Traduccion por Imagen'),
+          backgroundColor: ColorConstants.secondaryColor,
+          title: Text('Traduccion por Imagen',
+              style: Theme.of(context).textTheme.bodySmall?.merge(TextStyle(color: Colors.white))
+          ),
         ),
-        backgroundColor: Colors.black87,
+        backgroundColor: ColorConstants.lightBackground,
         body: ListView(children: [
           Padding(
             padding: EdgeInsets.all(20),
@@ -144,7 +175,9 @@ class _ImagenState extends State<Imagen> {
                   child: Text('Seleccionar imagen'),
                 ),
                 ElevatedButton(
-                  onPressed: uploadFile,
+                  onPressed: (){
+                    uploadFile(context);
+                  },
                   child: Text('Cargar imagen'),
                 ),
                 SizedBox(

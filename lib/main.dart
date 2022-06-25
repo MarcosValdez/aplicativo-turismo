@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
 
           textTheme: const TextTheme(
               titleLarge: TextStyle(fontSize: 36, fontStyle: FontStyle.italic),
-              bodySmall : TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
+              bodySmall : TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
           )
       ),
       debugShowCheckedModeBanner: false,
