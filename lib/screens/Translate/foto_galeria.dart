@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
+import 'package:aplicativo_turismo/Model/Translate/translate_model.dart';
 import 'package:uuid/uuid.dart';
 
 class Imagen extends StatefulWidget {
@@ -150,7 +151,16 @@ class _ImagenState extends State<Imagen> {
                 SizedBox(
                   height: 30,
                 ),
-                imagen == null ? Center() : Image.file(imagen!)
+                imagen == null ? Center() : Image.file(imagen!),
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => idioma())
+                    );
+                  },
+                  child: Text('Biblioteca'),
+                ),
               ],
             ),
           )
