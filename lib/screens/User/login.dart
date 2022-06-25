@@ -36,41 +36,47 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(child: Form(
+    return Material(
+        child: Form(
       key: _formKey,
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: ColorConstants.fondoForms),
-        padding: const EdgeInsets.all(30),
-        margin: const EdgeInsets.all(30),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              txt_blanco("Iniciar sesión", 30),
-              columna(),
-            ],
+      child: SingleChildScrollView(
+        reverse: true,
+        padding: EdgeInsets.all(32),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: ColorConstants.fondoForms),
+          padding: const EdgeInsets.all(30),
+          margin: const EdgeInsets.all(30),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                txt_blanco("Iniciar sesión", 30),
+                columna(),
+              ],
+            ),
           ),
         ),
       ),
     ));
   }
 
-  Widget txt_blanco (String texto, double sz){
+  Widget txt_blanco(String texto, double sz) {
     return Text(
       texto,
       style: TextStyle(fontSize: sz, color: Colors.white),
     );
   }
 
-  Widget columna(){
+  Widget columna() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         divider_blanco(),
         email(),
         contrasenia(),
-        mant_abierta(),
+        // mant_abierta(),
         btn_ingresar(),
         divider_blanco(),
         sz_box(),
@@ -79,11 +85,10 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-  
-  Widget email(){
+
+  Widget email() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 20.0, horizontal: 0.0),
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
       child: Column(
         children: [
           Row(
@@ -113,11 +118,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  
-  Widget contrasenia(){
+
+  Widget contrasenia() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 20.0, horizontal: 0.0),
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
       child: Column(
         children: [
           Row(
@@ -133,9 +137,7 @@ class _LoginPageState extends State<LoginPage> {
               suffixIcon: IconButton(
                 icon: Icon(
                   // Based on passwordVisible state choose the icon
-                  _passwordVisible
-                      ? Icons.visibility
-                      : Icons.visibility_off,
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
                   color: ColorConstants.primaryColor,
                 ),
                 onPressed: () {
@@ -159,8 +161,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  
-  Widget mant_abierta(){
+
+  Widget mant_abierta() {
     return Row(
       children: [
         Checkbox(
@@ -174,31 +176,28 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-  
-  Widget btn_ingresar(){
+
+  Widget btn_ingresar() {
     return Padding(
-      padding:
-      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
         child: Stack(
           children: <Widget>[
             Positioned.fill(
               child: Container(
-                decoration:
-                BoxDecoration(color: ColorConstants.secondaryColor),
+                decoration: BoxDecoration(color: ColorConstants.secondaryColor),
               ),
             ),
             TextButton(
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 12, horizontal: 80),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 80),
                 primary: Colors.white,
                 textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
-                signIn(emailController.text,
-                    passwordController.text);
+                signIn(emailController.text, passwordController.text);
               },
               child: const Text('Ingresar'),
             ),
@@ -208,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget divider_blanco(){
+  Widget divider_blanco() {
     return Divider(
       height: 20,
       color: Colors.white,
@@ -216,22 +215,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget sz_box(){
+  Widget sz_box() {
     return SizedBox(
       height: 10,
     );
   }
 
-  Widget btn_reg(){
+  Widget btn_reg() {
     return TextButton(
       style: TextButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
       ),
       onPressed: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => RegisterPage()));
+            context, MaterialPageRoute(builder: (context) => RegisterPage()));
         //Navigator.pop(context);
       },
       child: const Text('Registrar'),
