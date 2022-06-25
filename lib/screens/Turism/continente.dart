@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/Turism/pais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -45,9 +46,9 @@ class _continenteState extends State<continente> {
       appBar: AppBar(
         title: Text("Destinos a visitar"),
       ),
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       body: Container(
-        color: Colors.grey,
+        color: Colors.white,
         child: Form(
             key: _formKey,
             child: Column(
@@ -80,7 +81,7 @@ class _continenteState extends State<continente> {
                                     print(list);
                                     return
                                       Card(
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                         child: ListTile(
                                           title: Text(list[index]['nombre']),
 
@@ -118,13 +119,13 @@ class _continenteState extends State<continente> {
     return  DropdownButtonFormField<String>(
       value: null,
       hint: Text("Seleccionar una opcion"),
-      dropdownColor: Colors.blue, //dropdown background color
+      dropdownColor: ColorConstants.primaryColor, //dropdown background color
       isExpanded: true, //make true to make width 100%
       items: widget.tipo_continente_todos.map((list) {
         print(list);
         return DropdownMenuItem<String>(
           value: list["codigo"],
-          child: Text(list["nombre"]),
+          child: Text(list["nombre"], style: TextStyle(color: Colors.white),),
         );
       }).toList(),
       onChanged: (value) {
@@ -144,7 +145,7 @@ class _continenteState extends State<continente> {
         onPressed:(){
           _validar();
         },
-        color: Colors.blue,
+        color: ColorConstants.primaryColor,
         child: Text('Buscar', style: TextStyle(color: Colors.white))
     );
   }

@@ -77,7 +77,7 @@ class _menuState extends State<Menu> {
   Widget mostrar_dato (String texto){
     return Container(
         margin: EdgeInsets.all(10),
-        child: Text(texto, style: TextStyle(fontSize: 20))
+        child: Text(texto, style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold))
     );
   }
 
