@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../Model/User/user_model.dart';
+import '../../color_constants.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -42,36 +43,48 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
       body: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.grey),
-        padding: const EdgeInsets.all(30),
-        margin: const EdgeInsets.all(30),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              txt_blanco("Registro", 30),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  divider_blanco(),
-                  name(),
-                  email(),
-                  contrasen(),
-                  btn_registrar(),
-                  divider_blanco(),
-                  szbox(),
-                  txt_blanco("¿Ya estas resgitrado?", 16),
-                  btn_login(),
-                ],
-              )
-            ],
-          ),
-        ),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              reverse: true,
+              padding: EdgeInsets.all(32),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: ColorConstants.fondoForms),
+                padding: const EdgeInsets.all(30),
+                margin: const EdgeInsets.all(30),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      txt_blanco("Registro", 30),
+                      columna(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
       ),
+    );
+  }
+
+  Widget columna(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        divider_blanco(),
+        name(),
+        email(),
+        contrasen(),
+        btn_registrar(),
+        divider_blanco(),
+        szbox(),
+        txt_blanco("¿Ya estas resgitrado?", 16),
+        btn_login(),
+      ],
     );
   }
   
@@ -169,7 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   _passwordVisible
                       ? Icons.visibility
                       : Icons.visibility_off,
-                  color: Theme.of(context).primaryColorDark,
+                  color: ColorConstants.primaryColor,
                 ),
                 onPressed: () {
                   // Update the state i.e. toogle the state of passwordVisible variable
@@ -204,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Positioned.fill(
               child: Container(
                 decoration:
-                const BoxDecoration(color: Colors.blue),
+                BoxDecoration(color: ColorConstants.secondaryColor),
               ),
             ),
             TextButton(
