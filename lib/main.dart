@@ -43,12 +43,9 @@ class _MyAppState extends State<MyApp> {
               primary: ColorConstants.primaryColor,
               secondary: ColorConstants.secondaryColor),
           fontFamily: 'Georgia',
-
           textTheme: const TextTheme(
               titleLarge: TextStyle(fontSize: 36, fontStyle: FontStyle.italic),
-              bodySmall : TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
-          )
-      ),
+              bodySmall: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
