@@ -21,7 +21,7 @@ class _continenteState extends State<continente> {
   late List list;
   bool _autoValidate = false;
 
-  String URL = "http://127.0.0.1:5000/biblioteca/";
+  String URL = "https://api-turismo-backend.herokuapp.com/biblioteca/";
 
   Future getLista(tipo_continente) async{
     if (tipo_continente == "6") {
