@@ -17,6 +17,7 @@ class _principalState extends State<Principal> {
     'Lunahuaná es una localidad peruana capital del distrito homónimo ubicado en la provincia de Cañete en el departamento de Lima.'
   ];
   var Images = ['assets/img1.jpg', 'assets/img2.jpg', 'assets/img3.jpg'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,23 +120,6 @@ class _principalState extends State<Principal> {
                 });
               }).toList(),
             ),
-            /*Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: Images.map((urlOfItem) {
-                int index = Images.indexOf(urlOfItem);
-                return Container(
-                  width: 10.0,
-                  height: 10.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _currentIndex == index
-                        ? Color.fromRGBO(0, 0, 0, 0.8)
-                        : Color.fromRGBO(0, 0, 0, 0.3),
-                  ),
-                );
-              }).toList(),
-            )*/
           ],
         ),
       ),

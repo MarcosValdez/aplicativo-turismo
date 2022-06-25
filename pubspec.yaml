@@ -43,6 +43,7 @@ dependencies:
   fluttertoast: ^8.0.9
   firebase_storage: ^10.2.9
   uuid: ^3.0.6
+  http:
 
 dev_dependencies:
   flutter_test:

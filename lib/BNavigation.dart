@@ -48,7 +48,7 @@ class _BNavigatorState extends State<BNavigation> {
               ),
               NavigationDestination(
                 icon: Icon(Icons.settings_outlined),
-                label: 'Ajustes',
+                label: 'Turismo',
                 selectedIcon: Icon(Icons.settings),
               )
             ]),

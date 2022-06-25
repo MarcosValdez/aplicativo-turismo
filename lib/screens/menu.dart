@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:aplicativo_turismo/BNavigation.dart';
 import 'package:aplicativo_turismo/Model/User/user_model.dart';
 import 'package:aplicativo_turismo/routes.dart';
@@ -17,10 +19,12 @@ class _menuState extends State<Menu> {
   UserModel loggedInUser = UserModel();
 
   int index = 0;
+  late List continentes;
   BNavigation? myBNB;
 
   @override
   void initState(){
+    continentes = [];
     myBNB = BNavigation(currenIndex: (i){
       setState((){
         index = i;
@@ -31,6 +35,7 @@ class _menuState extends State<Menu> {
       this.loggedInUser = UserModel.fromMap(value.data());
       setState((){});
     });
+    listaContinentes();
   }
 
   @override
@@ -55,7 +60,7 @@ class _menuState extends State<Menu> {
       backgroundColor: Colors.black87,
       bottomNavigationBar: myBNB,
 
-      body: Routes(index: index),
+      body: Routes(index: index, continentes: continentes)
 
     );
   }
@@ -84,6 +89,15 @@ class _menuState extends State<Menu> {
         icon: Icon(Icons.logout),
         label: Text("Cerrar sesion"));
 
+  }
+
+  Future listaContinentes() async{
+    var url = Uri.parse('https://api-turismo-backend.herokuapp.com/biblioteca/listar-continentes');
+    final response = await http.get(url,headers:{
+      "Accept": "application/json",
+    });
+    continentes = json.decode(response.body);
+    return continentes;
   }
 
   Future<void> logout(BuildContext context) async {
