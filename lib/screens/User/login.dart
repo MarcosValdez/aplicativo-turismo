@@ -36,30 +36,33 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Form(
-      key: _formKey,
-      child: SingleChildScrollView(
-        reverse: true,
-        padding: EdgeInsets.all(32),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: ColorConstants.fondoForms),
-          padding: const EdgeInsets.all(30),
-          margin: const EdgeInsets.all(30),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                txt_blanco("Iniciar sesión", 30),
-                columna(),
-              ],
+    return Scaffold(
+      body: Container(
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              reverse: true,
+              padding: EdgeInsets.all(32),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: ColorConstants.fondoForms),
+                padding: const EdgeInsets.all(30),
+                margin: const EdgeInsets.all(30),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      txt_blanco("Iniciar sesión", 30),
+                      columna(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          )
       ),
-    ));
+        );
   }
 
   Widget txt_blanco(String texto, double sz) {
