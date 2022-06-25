@@ -29,15 +29,12 @@ class _continenteState extends State<continente> {
       final response = await http.get(url, headers: {
         "Accept": "application/json",
       });
-      print("ssssssssssssssss"+response.body);
       return json.decode(response.body);
     }else{
       var url = Uri.parse(URL+'listar-paises/$tipo_continente');
       final response = await http.get(url, headers: {
         "Accept": "application/json",
       });
-      print("222222222222222222"+response.body);
-      print("--------------------------- ------------------");
       return json.decode(response.body);
     }
   }
@@ -133,7 +130,6 @@ class _continenteState extends State<continente> {
       onChanged: (value) {
         setState(() {
           tipo=value!;
-          print("------------------"+tipo);
         });
 
       },

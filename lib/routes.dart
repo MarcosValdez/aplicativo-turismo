@@ -12,8 +12,6 @@ class Routes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("exito");
-    print(continentes);
     List<Widget> myList = [
       Principal(),
       // busqueda(),
