@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/Turism/pais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -48,9 +49,9 @@ class _continenteState extends State<continente> {
       appBar: AppBar(
         title: Text("Destinos a visitar"),
       ),
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       body: Container(
-        color: Colors.grey,
+        color: Colors.white,
         child: Form(
             key: _formKey,
             child: Column(
@@ -83,7 +84,7 @@ class _continenteState extends State<continente> {
                                     print(list);
                                     return
                                       Card(
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                         child: ListTile(
                                           title: Text(list[index]['nombre']),
 
@@ -148,7 +149,7 @@ class _continenteState extends State<continente> {
         onPressed:(){
           _validar();
         },
-        color: Colors.blue,
+        color: ColorConstants.primaryColor,
         child: Text('Buscar', style: TextStyle(color: Colors.white))
     );
   }
