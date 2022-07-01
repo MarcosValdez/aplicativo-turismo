@@ -36,6 +36,7 @@ class _idiomaState extends State<idioma> {
     );
   }
   Widget itemTraduccion(
+    String id,
     String idm_origen,
     String idm_traduc,
     String txt_origen,
@@ -43,12 +44,49 @@ class _idiomaState extends State<idioma> {
     String imagen,
   ){
     return Container(
-      margin: EdgeInsets.all(50),
+      margin: EdgeInsets.all(20),
       child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [txt_idmoriginal(txt_origen, idm_origen), txt_idmobjetivo(txt_traduc, idm_traduc)],
-          )),
+          child: Column(
+            children: [
+              img_encontrado(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  txt_idmoriginal(txt_origen, idm_origen),
+                  txt_idmobjetivo(txt_traduc, idm_traduc)],
+              ),
+              btn_delete(id)
+            ],
+          )
+      ),
+    );
+  }
+
+  Widget btn_delete(String id){
+    return Container(
+      width: 150,
+      height: 70,
+      child: ButtonBar(
+        children: [
+          ElevatedButton.icon(
+            onPressed: () {
+              deleteTraduccion(id);
+            },
+            icon: Icon(Icons.save),
+            label: Text('Eliminar', textAlign: TextAlign.center),
+          ),
+        ],
+      )
+    );
+  }
+  Widget img_encontrado() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 10)),
+      child: Image.asset(
+        'assets/text_encontrado.jpg',
+        height: 100,
+      ),
     );
   }
 
@@ -58,8 +96,8 @@ class _idiomaState extends State<idioma> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                txt_main(idm, 14),
-                txt_main(txt, 18),
+                txt_main(idm, 14, false),
+                txt_main(txt, 18, true),
               ],
             )));
   }
@@ -70,16 +108,24 @@ class _idiomaState extends State<idioma> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                txt_main(idm, 14),
-                txt_main(txt, 18),
+                txt_main(idm, 14, false),
+                txt_main(txt, 18, true),
               ],
             )));
   }
 
-  Widget txt_main(String txt, double size) {
+  Widget txt_main(String txt, double size, bool bold) {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
-      child: Text(
+      child: bold? Text(
+        txt,
+        style: TextStyle(
+          color: Colors.white,
+          fontFamily: 'Roboto',
+          fontSize: size,
+          fontWeight: FontWeight.bold
+        ),
+      ): Text(
         txt,
         style: TextStyle(
           color: Colors.white,
@@ -105,7 +151,7 @@ class _idiomaState extends State<idioma> {
             itemCount: traducciones.length,
             itemBuilder: (context, index) {
               TranslateModel t = traducciones[index];
-              return itemTraduccion(t.idm_origen, t.idm_traduc, t.txt_origen, t.txt_traduc, t.imagen);
+              return itemTraduccion(t.id, t.idm_origen, t.idm_traduc, t.txt_origen, t.txt_traduc, t.imagen);
             },
           );
         },
