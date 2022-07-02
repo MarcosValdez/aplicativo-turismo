@@ -47,9 +47,12 @@ class _menuState extends State<Menu> {
           color: Colors.white,
           child: Column(
             children: [
-              icono_usuario(),
-              mostrar_dato("${loggedInUser.nombre}"),
-              mostrar_dato("${loggedInUser.email}"),
+              UserAccountsDrawerHeader(
+                accountName: Text("${loggedInUser.nombre}"),
+                accountEmail: Text("${loggedInUser.email}"),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: ColorConstants.primaryColor,
+                ),),
               cerrar_sesion()
             ],
           ),
@@ -71,14 +74,7 @@ class _menuState extends State<Menu> {
       height: 100,
       width: 100,
       margin: EdgeInsets.all(50),
-      child: Icon(Icons.person_rounded, color: ColorConstants.secondaryLightColor, size: 100,),
-    );
-  }
-
-  Widget mostrar_dato (String texto){
-    return Container(
-        margin: EdgeInsets.all(10),
-        child: Text(texto, style: TextStyle(fontSize: 20))
+      child: Icon(Icons.account_circle, color: ColorConstants.primaryColor, size: 130,),
     );
   }
 
