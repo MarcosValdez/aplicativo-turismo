@@ -1,4 +1,4 @@
-import 'package:aplicativo_turismo/screens/Dicctionary/biblioteca.dart';
+import 'package:aplicativo_turismo/screens/Dictionary/biblioteca.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +34,7 @@ class _traduccionState extends State<traduccion> {
 
   Widget txt_header() {
     return Container(
-      margin: EdgeInsets.all(50),
+      margin: EdgeInsets.all(20),
       child: Center(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +47,7 @@ class _traduccionState extends State<traduccion> {
 
   Widget txt_traduccion() {
     return Container(
-      margin: EdgeInsets.all(50),
+      //margin: EdgeInsets.all(50),
       child: Center(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +129,7 @@ class _traduccionState extends State<traduccion> {
 
   Widget btn_guardar() {
     return Container(
-        width: 150,
+        width: 170,
         height: 70,
         child: ButtonBar(
           children: [
@@ -147,7 +147,7 @@ class _traduccionState extends State<traduccion> {
 
   Widget btn_rep() {
     return Container(
-        width: 150,
+        width: 170,
         height: 70,
         child: ButtonBar(
           children: [
