@@ -1,5 +1,5 @@
 
-import 'package:aplicativo_turismo/Model/User/user_model.dart';
+import 'package:aplicativo_turismo/screens/User/Model/user_model.dart';
 import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/Dictionary/view/widget/dictionary_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
