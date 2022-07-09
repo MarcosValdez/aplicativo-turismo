@@ -1,5 +1,5 @@
-import 'package:aplicativo_turismo/Calendar/view/calendar.dart';
-import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
+import 'package:aplicativo_turismo/calendar/view/calendar.dart';
+import 'package:aplicativo_turismo/screens/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
 import 'package:aplicativo_turismo/screens/principal.dart';
@@ -20,8 +20,8 @@ class Routes extends StatelessWidget {
       // busqueda(),
       Imagen(),
       Calendar(),
-      continente(tipo_continente: "6", tipo_continente_todos: continentes),
-      idioma(),
+      continente(tipo_continente: "6",tipo_continente_todos: continentes),
+      DictionaryScreen(),
     ];
     return myList[index];
   }

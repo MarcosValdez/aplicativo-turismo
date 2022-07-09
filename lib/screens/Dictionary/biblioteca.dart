@@ -1,4 +1,4 @@
-import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
+import 'package:aplicativo_turismo/screens/Dictionary/idioma.dart';
 import 'package:flutter/material.dart';
 
 class biblioteca extends StatefulWidget{

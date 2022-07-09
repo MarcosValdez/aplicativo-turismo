@@ -1,5 +1,5 @@
 import 'package:aplicativo_turismo/routes.dart';
-import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
+import 'package:aplicativo_turismo/screens/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         '/home': (context) => Menu(),
-        '/biblioteca': (context) => idioma(),
+        '/biblioteca': (context) => DictionaryScreen(),
         '/home/img_selecc': (context) => imagen(),
       },
     );

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:aplicativo_turismo/routes.dart';
-import 'package:aplicativo_turismo/screens/Dicctionary/idioma.dart';
+import 'package:aplicativo_turismo/screens/Dictionary/idioma.dart';
 import 'package:aplicativo_turismo/screens/principal.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';

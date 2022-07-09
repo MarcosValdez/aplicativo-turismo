@@ -130,7 +130,7 @@ class _continenteState extends State<continente> {
         print(list);
         return DropdownMenuItem<String>(
           value: list["codigo"],
-          child: Text(list["nombre"]),
+          child: Text(list["nombre"], style: TextStyle(color: Colors.white),),
         );
       }).toList(),
       onChanged: (value) {
