@@ -1,5 +1,6 @@
-import 'package:aplicativo_turismo/screens/Dictionary/model/translate_service.dart';
+
 import 'dart:async';
+import 'package:aplicativo_turismo/Dictionary/model/translate_service.dart';
 import 'package:aplicativo_turismo/Model/Translate/translate_model.dart';
 
 class TranslateRepository{
