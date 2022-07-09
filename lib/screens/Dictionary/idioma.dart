@@ -1,7 +1,7 @@
 import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicativo_turismo/Model/Translate/translate_model.dart';
-import 'package:aplicativo_turismo/Model/User/user_model.dart';
+import 'package:aplicativo_turismo/screens/User/Model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
