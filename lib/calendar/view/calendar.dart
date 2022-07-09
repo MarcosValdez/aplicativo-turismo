@@ -1,7 +1,8 @@
+import 'package:aplicativo_turismo/calendar/view_model/task_view_mdoel.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:aplicativo_turismo/screens/Calendar/calendar_modal.dart';
+import 'package:aplicativo_turismo/Calendar/view/calendar_modal.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
+    // TaskViewModel taskViewModel = context.watch<TaskViewModel>();
     return Scaffold(
       body: Container(
         child: Column(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ModalFit extends StatelessWidget {
-  const ModalFit({Key? key}) : super(key: key);
-
+  // const ModalFit({Key? key}) : super(key: key);
+  final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -18,6 +18,7 @@ class ModalFit extends StatelessWidget {
               maxLines: 8, //or null
               decoration:
                   InputDecoration.collapsed(hintText: "Ingresa la nota ..."),
+              controller: myController,
             ),
           )),
           Padding(
@@ -39,6 +40,8 @@ class ModalFit extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
+                      print(myController.text);
+                      // saveTask('user', myController.text, '12/10/2022');
                       Navigator.of(context).pop();
                     },
                     child: const Text('Guardar'),
