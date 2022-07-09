@@ -187,8 +187,7 @@ class _DictionaryWidgetState extends State<DictionaryWidget>{
           },
         );
       },
-
     );
-
   }
+
 }
