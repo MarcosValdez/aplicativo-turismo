@@ -1,18 +1,13 @@
 import 'dart:developer';
 
-import 'package:aplicativo_turismo/routes.dart';
-import 'package:aplicativo_turismo/screens/Dictionary/idioma.dart';
-import 'package:aplicativo_turismo/screens/principal.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:aplicativo_turismo/Model/Translate/translate_model.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../color_constants.dart';
-import '../menu.dart';
+import '../../../color_constants.dart';
+import '../../menu.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -27,7 +22,6 @@ class _ImagenState extends State<Imagen> {
 
   Future selImagen(op) async{
 
-    // var pickedFile;
     // Opcion de tomar foto o seleccionar desde galeria
     if(op == 1){
       pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -48,8 +42,6 @@ class _ImagenState extends State<Imagen> {
 
   // Upload image with a uuid in dir: imagenesTraduccion
   Future uploadFile(BuildContext context) async{
-    //Desea subir imagen?
-    // final path = 'files/${pickedFile!.name}';
     UploadTask updloadTask = FirebaseStorage.instance.ref().child('imagenesTraduccion').child(Uuid().v1()).putFile(imagen!);
     TaskSnapshot taskSnapshot = await updloadTask;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
@@ -81,7 +73,7 @@ class _ImagenState extends State<Imagen> {
     );
   }
 
-  opciones(context) {
+  carga_opciones(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -151,7 +143,8 @@ class _ImagenState extends State<Imagen> {
                       ),
                     )
                   ],
-                )),
+                )
+            ),
           );
         });
   }
@@ -173,7 +166,7 @@ class _ImagenState extends State<Imagen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    opciones(context);
+                    carga_opciones(context);
                   },
                   child: Text('Seleccionar imagen'),
                 ),
@@ -187,10 +180,10 @@ class _ImagenState extends State<Imagen> {
                   height: 30,
                 ),
                 imagen == null ? Center() : Image.file(imagen!),
-
               ],
             ),
           )
-        ]));
+        ])
+    );
   }
 }

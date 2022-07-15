@@ -1,6 +1,6 @@
 import 'package:aplicativo_turismo/routes.dart';
 import 'package:aplicativo_turismo/screens/Dictionary/view/screen/dictionary_screen.dart';
-import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
+import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
