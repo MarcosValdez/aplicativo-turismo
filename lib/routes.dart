@@ -1,5 +1,5 @@
 import 'package:aplicativo_turismo/calendar/view/calendar.dart';
-import 'package:aplicativo_turismo/screens/Dictionary/view/screen/dictionary_screen.dart';
+import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
 import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
 import 'package:aplicativo_turismo/screens/principal.dart';

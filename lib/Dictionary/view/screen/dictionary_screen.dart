@@ -1,9 +1,5 @@
-
-import 'package:aplicativo_turismo/Model/User/user_model.dart';
 import 'package:aplicativo_turismo/color_constants.dart';
-import 'package:aplicativo_turismo/screens/Dictionary/view/widget/dictionary_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aplicativo_turismo/Dictionary/view/widget/dictionary_widget.dart';
 import 'package:flutter/material.dart';
 
 class DictionaryScreen extends StatefulWidget{

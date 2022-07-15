@@ -1,4 +1,4 @@
-import 'package:aplicativo_turismo/calendar/view_model/task_view_mdoel.dart';
+import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:table_calendar/table_calendar.dart';
