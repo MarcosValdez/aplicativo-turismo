@@ -1,10 +1,13 @@
+import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ModalFit extends StatelessWidget {
   // const ModalFit({Key? key}) : super(key: key);
   final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    TaskViewModel taskViewModel = context.watch<TaskViewModel>();
     return Material(
         child: SafeArea(
       top: false,
@@ -41,6 +44,7 @@ class ModalFit extends StatelessWidget {
                     ),
                     onPressed: () {
                       print(myController.text);
+                      print(taskViewModel.taskListModel);
                       // saveTask('user', myController.text, '12/10/2022');
                       Navigator.of(context).pop();
                     },

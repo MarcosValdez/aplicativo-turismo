@@ -1,4 +1,5 @@
-import 'package:aplicativo_turismo/Calendar/model/task_model.dart';
+import 'package:aplicativo_turismo/calendar/model/task_model.dart';
+import 'package:aplicativo_turismo/calendar/repo/api_status.dart';
 import 'package:aplicativo_turismo/calendar/repo/task_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -20,8 +21,9 @@ class TaskViewModel extends ChangeNotifier {
 
   getTasks() async {
     setLoading(true);
-    var response = await TaskService.getTasks();
-    setTaskListModel(response);
+    var response = (await TaskService.getTasks()) as Success;
+    List<TaskModel> res = response.reponse;
+    setTaskListModel(res);
     setLoading(false);
   }
 }

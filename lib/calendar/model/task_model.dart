@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-TaskModel taskModelFromJson(String str) => TaskModel.fromJson(json.decode(str));
+List<TaskModel> taskModelFromJson(String str) =>
+    List<TaskModel>.from(json.decode(str).map((x) => TaskModel.fromJson(x)));
 
 String taskModelToJson(TaskModel data) => json.encode(data.toJson());
 
 class TaskModel {
   TaskModel({
     required this.date,
-     required this.dateCreated,
+    required this.dateCreated,
     required this.description,
     required this.user,
   });
