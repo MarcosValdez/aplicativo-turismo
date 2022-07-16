@@ -1,6 +1,6 @@
 import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/routes.dart';
-import 'package:aplicativo_turismo/screens/Translate/foto_galeria.dart';
+import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
+import 'Dictionary/view/screen/dictionary_screen.dart';
 import 'color_constants.dart';
 import 'firebase_options.dart';
 
