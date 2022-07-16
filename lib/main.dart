@@ -1,4 +1,5 @@
 import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
+import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/routes.dart';
 import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
