@@ -1,7 +1,5 @@
 import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
-import 'package:aplicativo_turismo/routes.dart';
-import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
@@ -23,20 +21,8 @@ void main() async {
   runApp(const MyApp());
 }
 
-/*void main() {
-  Firebase.initializeApp();
-  runApp(const MyApp());
-}*/
-
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int index = 0;
 
   @override
   Widget build(BuildContext context) {
