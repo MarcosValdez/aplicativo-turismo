@@ -15,6 +15,7 @@ class TaskService {
         uri,
         headers: {"Content-Type": "application/json"},
       );
+      print(response.body);
       if (200 == response.statusCode) {
         return Success(code: 200, response: taskModelFromJson(response.body));
       }

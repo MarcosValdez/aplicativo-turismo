@@ -16,6 +16,7 @@ class TaskModel {
     required this.userId,
   });
 
+
   bool active;
   DateTime date;
   String dateCreated;

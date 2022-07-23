@@ -70,7 +70,7 @@ class _CalendarState extends State<Calendar> {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        print(taskViewModel.taskListModel);
+                        print(taskViewModel.taskListModel.length);
                         showMaterialModalBottomSheet(
                           expand: false,
                           context: context,

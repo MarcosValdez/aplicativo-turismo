@@ -1,3 +1,4 @@
+import 'package:aplicativo_turismo/calendar/bloc/task_bloc.dart';
 import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'Dictionary/view/screen/dictionary_screen.dart';
 import 'color_constants.dart';
@@ -26,8 +28,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return MultiBlocProvider(
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => TaskViewModel())],
+      // providers: [BlocProvider<TaskBloc>(create: (_)=>TaskBloc())],
       child: MaterialApp(
         title: 'AppTurismo',
         theme: ThemeData(

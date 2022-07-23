@@ -49,7 +49,7 @@ class ModalFit extends StatelessWidget {
                     ),
                     onPressed: () {
                       TaskService.saveTask(
-                          '2', myController.text, selectedDay.toString());
+                          '1', myController.text, selectedDay.toString());
                       Navigator.of(context).pop();
                     },
                     child: const Text('Guardar'),
