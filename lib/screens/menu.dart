@@ -42,7 +42,7 @@ class _menuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: drawer_usuario(context),
+      drawer: drawerWidget(),
       appBar: AppBar(
         title: Text('Grupo 01'),
       ),
