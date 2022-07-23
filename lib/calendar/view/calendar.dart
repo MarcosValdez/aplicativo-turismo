@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:aplicativo_turismo/Calendar/view/calendar_modal.dart';
+import 'package:provider/provider.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -14,15 +15,17 @@ class _CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
+  // DateTime? get selectedDay => _selectedDay;
+
   @override
   Widget build(BuildContext context) {
-    // TaskViewModel taskViewModel = context.watch<TaskViewModel>();
+    TaskViewModel taskViewModel = context.watch<TaskViewModel>();
     return Scaffold(
       body: Container(
         child: Column(
           children: [
             TableCalendar(
-              firstDay: DateTime(1999),
+              firstDay: DateTime(1900),
               lastDay: DateTime(2050),
               focusedDay: _focusedDay,
               calendarFormat: _calendarFormat,
@@ -56,7 +59,7 @@ class _CalendarState extends State<Calendar> {
                   children: <Widget>[
                     Positioned.fill(
                       child: Container(
-                        decoration: BoxDecoration(color: Colors.green),
+                        decoration: const BoxDecoration(color: Colors.green),
                       ),
                     ),
                     TextButton(
@@ -67,11 +70,13 @@ class _CalendarState extends State<Calendar> {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
+                        print(taskViewModel.taskListModel.length);
                         showMaterialModalBottomSheet(
                           expand: false,
                           context: context,
                           backgroundColor: Colors.transparent,
-                          builder: (context) => ModalFit(),
+                          builder: (context) =>
+                              ModalFit(selectedDay: _selectedDay),
                         );
                       },
                       child: const Text('Crear nota'),

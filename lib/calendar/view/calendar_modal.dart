@@ -1,10 +1,15 @@
+import 'package:aplicativo_turismo/calendar/repo/task_service.dart';
 import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ModalFit extends StatelessWidget {
-  // const ModalFit({Key? key}) : super(key: key);
+  ModalFit({required this.selectedDay});
+  DateTime? selectedDay;
   final myController = TextEditingController();
+
+  // ModalFit(DateTime? selectedDay);
+
   @override
   Widget build(BuildContext context) {
     TaskViewModel taskViewModel = context.watch<TaskViewModel>();
@@ -16,11 +21,11 @@ class ModalFit extends StatelessWidget {
         children: <Widget>[
           Card(
               child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: TextField(
               maxLines: 8, //or null
-              decoration:
-                  InputDecoration.collapsed(hintText: "Ingresa la nota ..."),
+              decoration: const InputDecoration.collapsed(
+                  hintText: "Ingresa la nota ..."),
               controller: myController,
             ),
           )),
@@ -43,9 +48,8 @@ class ModalFit extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
-                      print(myController.text);
-                      print(taskViewModel.taskListModel);
-                      // saveTask('user', myController.text, '12/10/2022');
+                      TaskService.saveTask(
+                          '1', myController.text, selectedDay.toString());
                       Navigator.of(context).pop();
                     },
                     child: const Text('Guardar'),
@@ -54,7 +58,7 @@ class ModalFit extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           )
         ],

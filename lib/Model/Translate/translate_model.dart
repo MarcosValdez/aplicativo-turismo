@@ -96,7 +96,7 @@ Future showTraducciones() async
         data['txt_traduc'],
         data['imagen']
     );
-    print(n.toMap());
+    // print(n.toMap());
     list.add(n);
   }
 }
@@ -139,6 +139,6 @@ Future showTraduccionesEmail(String email) async
       data['txt_traduc'],
       data['imagen']
     );
-    print(n.toMap());
+    // print(n.toMap());
   }
 }
