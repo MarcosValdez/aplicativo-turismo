@@ -5,6 +5,7 @@ import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // Firebase
@@ -60,7 +61,17 @@ class _MyAppState extends State<MyApp> {
             title: Text('Turismo'),
           ),
           backgroundColor: Colors.black38,
-          body: LoginPage(),
+          body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot){
+              if (snapshot.hasData){
+                return Menu();
+              }
+              else{
+                return LoginPage();
+              }
+            },
+          ),
         ),
         routes: {
           '/home': (context) => Menu(),

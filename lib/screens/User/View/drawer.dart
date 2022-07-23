@@ -1,3 +1,4 @@
+import 'package:aplicativo_turismo/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,8 @@ Widget drawer_usuario(){
         child: Column(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text("${loggedInUser.email}"),
-              accountEmail: Text("${user?.email}"),
+              accountName: Text("${loggedInUser.nombre}"),
+              accountEmail: Text("${loggedInUser.email}"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: ColorConstants.primaryColor,
               ),),
@@ -61,7 +62,7 @@ Widget cerrar_sesion(BuildContext context){
 Future<void> logout(BuildContext context) async {
   await FirebaseAuth.instance.signOut();
   Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => LoginPage()));
+      MaterialPageRoute(builder: (context) => MyApp()));
 }
 
 }
