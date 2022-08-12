@@ -1,3 +1,5 @@
+import 'package:aplicativo_turismo/Turismo/models/pais.dart';
+import 'package:aplicativo_turismo/Turismo/view/pais_page.dart';
 import 'package:aplicativo_turismo/calendar/view/calendar.dart';
 import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/screens/Turism/continente.dart';
@@ -18,7 +20,7 @@ class Routes extends StatelessWidget {
       // busqueda(),
       Imagen(),
       Calendar(),
-      continente(tipo_continente: "6",tipo_continente_todos: continentes),
+      PaisPage(),
       DictionaryScreen(),
     ];
     return myList[index];
