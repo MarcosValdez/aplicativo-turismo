@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../Model/User/user_model.dart';
+import 'Model/user_model.dart';
 import '../../color_constants.dart';
 
 class RegisterPage extends StatefulWidget {

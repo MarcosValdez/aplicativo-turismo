@@ -4,8 +4,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'package:uuid/uuid.dart';
+
+import '../../../color_constants.dart';
+import '../../menu.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -20,7 +22,6 @@ class _ImagenState extends State<Imagen> {
 
   Future selImagen(op) async{
 
-    // var pickedFile;
     // Opcion de tomar foto o seleccionar desde galeria
     if(op == 1){
       pickedFile = await picker.getImage(source: ImageSource.camera);
@@ -40,16 +41,39 @@ class _ImagenState extends State<Imagen> {
   }
 
   // Upload image with a uuid in dir: imagenesTraduccion
-  Future uploadFile() async{
-    //Desea subir imagen?
-    // final path = 'files/${pickedFile!.name}';
+  Future uploadFile(BuildContext context) async{
     UploadTask updloadTask = FirebaseStorage.instance.ref().child('imagenesTraduccion').child(Uuid().v1()).putFile(imagen!);
     TaskSnapshot taskSnapshot = await updloadTask;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     log(downloadUrl);
+    await _showMyDialog(context);
   }
 
-  opciones(context) {
+  Widget _buildAlertDialog() {
+    return AlertDialog(
+      title: Text('Notificacion'),
+      content:
+      Text("La imagen se ha cargado con exito"),
+      actions: <Widget>[
+        FlatButton(
+            child: Text("Aceptar"),
+            textColor: Colors.blue,
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => Menu()));
+            }),
+      ],
+    );
+  }
+
+  Future<void> _showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (_) => _buildAlertDialog(),
+    );
+  }
+
+  carga_opciones(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -119,7 +143,8 @@ class _ImagenState extends State<Imagen> {
                       ),
                     )
                   ],
-                )),
+                )
+            ),
           );
         });
   }
@@ -128,10 +153,12 @@ class _ImagenState extends State<Imagen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text('Traduccion por Imagen'),
+          backgroundColor: ColorConstants.secondaryColor,
+          title: Text('Traduccion por Imagen',
+              style: Theme.of(context).textTheme.bodySmall?.merge(TextStyle(color: Colors.white))
+          ),
         ),
-        backgroundColor: Colors.black87,
+        backgroundColor: ColorConstants.lightBackground,
         body: ListView(children: [
           Padding(
             padding: EdgeInsets.all(20),
@@ -139,21 +166,24 @@ class _ImagenState extends State<Imagen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    opciones(context);
+                    carga_opciones(context);
                   },
                   child: Text('Seleccionar imagen'),
                 ),
                 ElevatedButton(
-                  onPressed: uploadFile,
+                  onPressed: (){
+                    uploadFile(context);
+                  },
                   child: Text('Cargar imagen'),
                 ),
                 SizedBox(
                   height: 30,
                 ),
-                imagen == null ? Center() : Image.file(imagen!)
+                imagen == null ? Center() : Image.file(imagen!),
               ],
             ),
           )
-        ]));
+        ])
+    );
   }
 }

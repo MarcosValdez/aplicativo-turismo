@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/Turism/pais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../../color_constants.dart';
 
 class continente extends StatefulWidget {
   late String tipo_continente;
@@ -44,11 +45,12 @@ class _continenteState extends State<continente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Destinos a visitar"),
+        backgroundColor: ColorConstants.secondaryColor,
+        title: Text("Destinos a visitar", style: Theme.of(context).textTheme.bodySmall?.merge(TextStyle(color: Colors.white))),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey,
       body: Container(
-        color: Colors.white,
+        color: ColorConstants.lightBackground,
         child: Form(
             key: _formKey,
             child: Column(
@@ -77,11 +79,11 @@ class _continenteState extends State<continente> {
                                   itemBuilder: (BuildContext context, int index){
 
                                     list = snapshot.data;
-                                    print(index);
-                                    print(list);
+                                    // print(index);
+                                    // print(list);
                                     return
                                       Card(
-                                        color: Colors.white,
+                                        color: ColorConstants.cards,
                                         child: ListTile(
                                           title: Text(list[index]['nombre']),
 
@@ -122,7 +124,7 @@ class _continenteState extends State<continente> {
       dropdownColor: ColorConstants.primaryColor, //dropdown background color
       isExpanded: true, //make true to make width 100%
       items: widget.tipo_continente_todos.map((list) {
-        print(list);
+        // print(list);
         return DropdownMenuItem<String>(
           value: list["codigo"],
           child: Text(list["nombre"], style: TextStyle(color: Colors.white),),

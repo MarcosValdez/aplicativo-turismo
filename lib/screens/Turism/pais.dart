@@ -12,7 +12,7 @@ class _paisState extends State<pais> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Destinos a visitar"),
+        title: Text("Destinos a visitar", style: Theme.of(context).textTheme.bodySmall?.merge(TextStyle(color: Colors.white))),
       ),
       backgroundColor: Colors.black,
       body: Container(
