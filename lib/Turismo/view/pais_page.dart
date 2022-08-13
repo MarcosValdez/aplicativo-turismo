@@ -11,7 +11,6 @@ class PaisPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (_) => PaisBloc(httpClient: http.Client())..add(PostFetched()),
-        
         child: Column(children: [ContinenteList(),PaisList()],) 
           
         //child: PaisList(),
