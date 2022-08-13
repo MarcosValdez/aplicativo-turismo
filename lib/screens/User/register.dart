@@ -223,9 +223,8 @@ class _RegisterPageState extends State<RegisterPage> {
             TextButton(
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 12, horizontal: 80),
+                    vertical: 12, horizontal: 10),
                 primary: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
                 registroUsuario(correo.text, contrasenia.text);
