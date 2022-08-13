@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:uuid/uuid.dart';
-
+import 'package:aplicativo_turismo/Model/Translate/translate_model.dart';
 import '../../../color_constants.dart';
 import '../../menu.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
-
+import 'package:aplicativo_turismo/screens/User/Model/user_model.dart';
+import 'package:aplicativo_turismo/color_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -24,6 +27,17 @@ class _ImagenState extends State<Imagen> {
   var pickedFile;
   String escaneado = "";
   String traducido = "";
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState(){
+    super.initState();
+    FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState((){});
+    });
+  }
 
   Future selImagen(op) async{
 
@@ -202,6 +216,12 @@ class _ImagenState extends State<Imagen> {
                     uploadFile(context);
                   },
                   child: Text('Cargar imagen'),
+                ),
+                ElevatedButton(
+                  onPressed: (){
+                    insertTraduccion(loggedInUser.email.toString(), escaneado, traducido);
+                  },
+                  child: Text('Guardar traducción'),
                 ),
                 SizedBox(
                   height: 30,

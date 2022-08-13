@@ -114,6 +114,24 @@ void deleteTraduccion(String id) async{
   );
 }
 
+void insertTraduccion(String email, String txtOri, String txtTrad) async{
+  var uri = Uri.parse('http://api-turismo-backend.herokuapp.com/biblioteca/insert');
+  Map datajson = {
+    "email" : email,
+    "idm_origen": "Español",
+    "idm_traduc": "Ingles",
+    "txt_origen": txtOri,
+    "txt_traduc": txtTrad,
+    "img": "img_url"
+  };
+  var body = json.encode(datajson);
+  await http.post(
+      uri,
+      headers: {"Content-Type": "application/json"},
+      body: body
+  );
+}
+
 Future showTraduccionesEmail(String email) async
 {
   var uri = Uri.parse('http://api-turismo-backend.herokuapp.com/biblioteca/listarEmail');
