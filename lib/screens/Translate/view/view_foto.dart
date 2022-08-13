@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../color_constants.dart';
 import '../../menu.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _ImagenState extends State<Imagen> {
   File? imagen;
   final picker = ImagePicker();
   var pickedFile;
+  String escaneado = "";
 
   Future selImagen(op) async{
 
@@ -36,8 +38,20 @@ class _ImagenState extends State<Imagen> {
         print("No se selecciono una imagen");
       }
     });
-    // Cerrar al seleccionar
-    Navigator.of(context).pop();
+    getRecognisedText(imagen!);
+    Navigator.of(context).pop();  }
+
+  Future<void> getRecognisedText(File imagen) async {
+    final inputImage = InputImage.fromFilePath(imagen.path);
+    final textDetector = TextRecognizer(script: TextRecognitionScript.latin);
+    RecognizedText recognisedText = await textDetector.processImage(inputImage);
+    await textDetector.close();
+    for (TextBlock block in recognisedText.blocks) {
+      for (TextLine line in block.lines) {
+        escaneado = escaneado + line.text + "\n";
+      }
+    }
+    setState((){});
   }
 
   // Upload image with a uuid in dir: imagenesTraduccion
@@ -180,6 +194,7 @@ class _ImagenState extends State<Imagen> {
                   height: 30,
                 ),
                 imagen == null ? Center() : Image.file(imagen!),
+                Text(escaneado)
               ],
             ),
           )

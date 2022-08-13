@@ -196,9 +196,8 @@ class _LoginPageState extends State<LoginPage> {
             TextButton(
               style: TextButton.styleFrom(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 80),
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                 primary: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
                 signIn(emailController.text, passwordController.text);
