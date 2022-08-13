@@ -9,6 +9,8 @@ import 'package:uuid/uuid.dart';
 import '../../../color_constants.dart';
 import '../../menu.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+
 
 class Imagen extends StatefulWidget {
   @override
@@ -21,6 +23,7 @@ class _ImagenState extends State<Imagen> {
   final picker = ImagePicker();
   var pickedFile;
   String escaneado = "";
+  String traducido = "";
 
   Future selImagen(op) async{
 
@@ -46,11 +49,21 @@ class _ImagenState extends State<Imagen> {
     final textDetector = TextRecognizer(script: TextRecognitionScript.latin);
     RecognizedText recognisedText = await textDetector.processImage(inputImage);
     await textDetector.close();
+    escaneado = "";
     for (TextBlock block in recognisedText.blocks) {
       for (TextLine line in block.lines) {
         escaneado = escaneado + line.text + "\n";
       }
     }
+    setState((){});
+    traduccion(escaneado);
+  }
+
+  Future<void> traduccion(String original) async{
+    final onDeviceTranslator = OnDeviceTranslator(sourceLanguage: TranslateLanguage.english, targetLanguage: TranslateLanguage.spanish);
+    final String response = await onDeviceTranslator.translateText(original);
+    await onDeviceTranslator.close();
+    traducido = response;
     setState((){});
   }
 
@@ -194,7 +207,8 @@ class _ImagenState extends State<Imagen> {
                   height: 30,
                 ),
                 imagen == null ? Center() : Image.file(imagen!),
-                Text(escaneado)
+                Text("\nTexto detectado:\n\n"+escaneado+"\n"),
+                Text("Traduccion:\n\n"+traducido)
               ],
             ),
           )
