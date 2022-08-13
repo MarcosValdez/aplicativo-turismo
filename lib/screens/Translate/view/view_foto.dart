@@ -60,7 +60,7 @@ class _ImagenState extends State<Imagen> {
   }
 
   Future<void> traduccion(String original) async{
-    final onDeviceTranslator = OnDeviceTranslator(sourceLanguage: TranslateLanguage.english, targetLanguage: TranslateLanguage.spanish);
+    final onDeviceTranslator = OnDeviceTranslator(sourceLanguage: TranslateLanguage.spanish, targetLanguage: TranslateLanguage.english);
     final String response = await onDeviceTranslator.translateText(original);
     await onDeviceTranslator.close();
     traducido = response;
