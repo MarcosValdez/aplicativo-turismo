@@ -10,14 +10,24 @@ class PaisListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Material(
-      child: ListTile(
-        //leading: Text('${post.codigo}', style: textTheme.caption),
-        //leading: Text('sss', style: textTheme.caption),
-        title: Text(post.nombre),
-        isThreeLine: true,
-        subtitle: Text(post.continente),
-        dense: true,
-      ),
-    );
+        child: Column(children: <Widget>[
+      Container(
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white38, width: 1),
+            borderRadius: BorderRadius.circular(9),
+          ),
+          tileColor: Color.fromRGBO(207, 235, 229, 1),
+          //tileColor: Color.fromARGB(255, 36, 219, 192),
+          leading: Icon(Icons.emoji_flags),
+          title: Text(post.nombre),
+          subtitle: Text(post.continente),
+          //dense: true,
+          onTap: () => {print("object")},
+        ),
+      ))
+    ]));
   }
 }
