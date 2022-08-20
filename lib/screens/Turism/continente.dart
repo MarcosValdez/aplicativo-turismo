@@ -31,15 +31,12 @@ class _continenteState extends State<continente> {
       final response = await http.get(url, headers: {
         "Accept": "application/json",
       });
-      print("ssssssssssssssss"+response.body);
       return json.decode(response.body);
     }else{
       var url = Uri.parse(URL+'listar-paises/$tipo_continente');
       final response = await http.get(url, headers: {
         "Accept": "application/json",
       });
-      print("222222222222222222"+response.body);
-      print("--------------------------- ------------------");
       return json.decode(response.body);
     }
   }
@@ -82,8 +79,8 @@ class _continenteState extends State<continente> {
                                   itemBuilder: (BuildContext context, int index){
 
                                     list = snapshot.data;
-                                    print(index);
-                                    print(list);
+                                    // print(index);
+                                    // print(list);
                                     return
                                       Card(
                                         color: ColorConstants.cards,
@@ -127,7 +124,7 @@ class _continenteState extends State<continente> {
       dropdownColor: ColorConstants.primaryColor, //dropdown background color
       isExpanded: true, //make true to make width 100%
       items: widget.tipo_continente_todos.map((list) {
-        print(list);
+        // print(list);
         return DropdownMenuItem<String>(
           value: list["codigo"],
           child: Text(list["nombre"], style: TextStyle(color: Colors.white),),
@@ -136,7 +133,6 @@ class _continenteState extends State<continente> {
       onChanged: (value) {
         setState(() {
           tipo=value!;
-          print("------------------"+tipo);
         });
 
       },

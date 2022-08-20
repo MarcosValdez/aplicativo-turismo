@@ -96,7 +96,7 @@ Future showTraducciones() async
         data['txt_traduc'],
         data['imagen']
     );
-    print(n.toMap());
+    // print(n.toMap());
     list.add(n);
   }
 }
@@ -108,6 +108,24 @@ void deleteTraduccion(String id) async{
   };
   var body = json.encode(datajson);
   await http.delete(
+      uri,
+      headers: {"Content-Type": "application/json"},
+      body: body
+  );
+}
+
+void insertTraduccion(String email, String txtOri, String txtTrad) async{
+  var uri = Uri.parse('http://api-turismo-backend.herokuapp.com/biblioteca/insert');
+  Map datajson = {
+    "email" : email,
+    "idm_origen": "Español",
+    "idm_traduc": "Ingles",
+    "txt_origen": txtOri,
+    "txt_traduc": txtTrad,
+    "img": "img_url"
+  };
+  var body = json.encode(datajson);
+  await http.post(
       uri,
       headers: {"Content-Type": "application/json"},
       body: body
@@ -139,6 +157,6 @@ Future showTraduccionesEmail(String email) async
       data['txt_traduc'],
       data['imagen']
     );
-    print(n.toMap());
+    // print(n.toMap());
   }
 }
