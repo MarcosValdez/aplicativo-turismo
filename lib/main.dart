@@ -2,7 +2,8 @@ import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/routes.dart';
 import 'package:aplicativo_turismo/screens/Translate/view/view_foto.dart';
-import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
+import 'package:aplicativo_turismo/screens/Translate/view/CargaImagen.dart';
+//import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/User/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/home': (context) => Menu(),
           '/biblioteca': (context) => DictionaryScreen(),
-          '/home/img_selecc': (context) => imagen(),
+          '/home/img_selecc': (context) => CargaImagen(),
         },
       ),
     );

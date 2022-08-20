@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:aplicativo_turismo/screens/Translate/utils/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -41,8 +42,9 @@ class _ImagenState extends State<Imagen> {
   }
 
   // Upload image with a uuid in dir: imagenesTraduccion
+  // Se agrego el uso de utils/constants
   Future uploadFile(BuildContext context) async{
-    UploadTask updloadTask = FirebaseStorage.instance.ref().child('imagenesTraduccion').child(Uuid().v1()).putFile(imagen!);
+    UploadTask updloadTask = FirebaseStorage.instance.ref().child(RUTA_IMAGEN).child(Uuid().v1()).putFile(imagen!);
     TaskSnapshot taskSnapshot = await updloadTask;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     log(downloadUrl);
@@ -53,7 +55,7 @@ class _ImagenState extends State<Imagen> {
     return AlertDialog(
       title: Text('Notificacion'),
       content:
-      Text("La imagen se ha cargado con exito"),
+      const Text(MENSAJE_EXITO_CARGA_IMAGEN),
       actions: <Widget>[
         FlatButton(
             child: Text("Aceptar"),
