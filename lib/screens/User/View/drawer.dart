@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../../../color_constants.dart';
 import '../Model/user_model.dart';
-import '../login.dart';
 class drawerWidget extends StatefulWidget{
   @override
   _drawerWidgetState createState() => _drawerWidgetState();
@@ -39,7 +38,7 @@ Widget drawer_usuario(){
           children: [
             UserAccountsDrawerHeader(
               accountName: Text("${loggedInUser.nombre}"),
-              accountEmail: Text("${loggedInUser.email}"),
+              accountEmail: Text("${loggedInUser.email}\n\nPais de procedencia: ${loggedInUser.pais}"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: ColorConstants.primaryColor,
               ),),
