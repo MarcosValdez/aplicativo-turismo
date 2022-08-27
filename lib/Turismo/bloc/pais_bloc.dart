@@ -45,7 +45,6 @@ class PaisBloc extends Bloc<PaisEvent, PaisState> {
     if (state.hasReachedMax) return;
     try {
       if (state.status == PaisStatus.initial) {
-        print("****aca esta el problema");
         final posts = await _fetchPosts(state.codigo);
         return emit(state.copyWith(
           status: PaisStatus.success,

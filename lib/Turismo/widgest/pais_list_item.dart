@@ -1,4 +1,5 @@
 import 'package:aplicativo_turismo/Turismo/models/pais.dart';
+import 'package:aplicativo_turismo/Turismo/view/cultura_Page.dart';
 import 'package:flutter/material.dart';
 
 class PaisListItem extends StatelessWidget {
@@ -25,7 +26,12 @@ class PaisListItem extends StatelessWidget {
           title: Text(post.nombre),
           subtitle: Text(post.continente),
           //dense: true,
-          onTap: () => {print("object")},
+          onTap: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CulturaPage(pais: post.nombre,)),
+            )
+          },
         ),
       ))
     ]));
