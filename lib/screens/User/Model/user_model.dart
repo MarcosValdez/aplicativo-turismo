@@ -2,14 +2,16 @@ class UserModel {
   String? uid;
   String? email;
   String? nombre;
+  String? pais;
 
-  UserModel({this.uid, this.email, this.nombre});
+  UserModel({this.uid, this.email, this.nombre, this.pais});
 
   factory UserModel.fromMap(map) {
     return UserModel(
       uid: map['uid'],
       email: map['email'],
       nombre: map['nombre'],
+      pais: map['pais']
     );
   }
 
@@ -18,6 +20,7 @@ class UserModel {
       'uid': uid,
       'email': email,
       'nombre': nombre,
+      'pais':pais
     };
   }
 }
