@@ -1,5 +1,6 @@
 import 'package:aplicativo_turismo/calendar/view/calendar.dart';
 import 'package:aplicativo_turismo/color_constants.dart';
+import 'package:aplicativo_turismo/main.dart';
 import 'package:aplicativo_turismo/screens/User/register.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -213,9 +214,8 @@ class _LoginPageState extends State<LoginPage> {
             TextButton(
               style: TextButton.styleFrom(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 80),
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                 primary: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
                 signIn(emailController.text, passwordController.text);
@@ -265,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Accediendo"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Menu())),
+                      MaterialPageRoute(builder: (context) => MyApp())),
                   prefs.setString('email', email),
                   prefs.setString('uid', uid.user!.uid),
                 });

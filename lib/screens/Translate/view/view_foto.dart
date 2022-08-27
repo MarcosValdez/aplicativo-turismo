@@ -1,13 +1,20 @@
 import 'dart:developer';
 
+import 'package:aplicativo_turismo/screens/Translate/utils/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:uuid/uuid.dart';
-
+import 'package:aplicativo_turismo/Model/Translate/translate_model.dart';
 import '../../../color_constants.dart';
 import '../../menu.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+import 'package:aplicativo_turismo/screens/User/Model/user_model.dart';
+import 'package:aplicativo_turismo/color_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Imagen extends StatefulWidget {
   @override
@@ -19,6 +26,19 @@ class _ImagenState extends State<Imagen> {
   File? imagen;
   final picker = ImagePicker();
   var pickedFile;
+  String escaneado = "";
+  String traducido = "";
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState(){
+    super.initState();
+    FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState((){});
+    });
+  }
 
   Future selImagen(op) async{
 
@@ -36,13 +56,36 @@ class _ImagenState extends State<Imagen> {
         print("No se selecciono una imagen");
       }
     });
-    // Cerrar al seleccionar
-    Navigator.of(context).pop();
+    getRecognisedText(imagen!);
+    Navigator.of(context).pop();  }
+
+  Future<void> getRecognisedText(File imagen) async {
+    final inputImage = InputImage.fromFilePath(imagen.path);
+    final textDetector = TextRecognizer(script: TextRecognitionScript.latin);
+    RecognizedText recognisedText = await textDetector.processImage(inputImage);
+    await textDetector.close();
+    escaneado = "";
+    for (TextBlock block in recognisedText.blocks) {
+      for (TextLine line in block.lines) {
+        escaneado = escaneado + line.text + "\n";
+      }
+    }
+    setState((){});
+    traduccion(escaneado);
+  }
+
+  Future<void> traduccion(String original) async{
+    final onDeviceTranslator = OnDeviceTranslator(sourceLanguage: TranslateLanguage.spanish, targetLanguage: TranslateLanguage.english);
+    final String response = await onDeviceTranslator.translateText(original);
+    await onDeviceTranslator.close();
+    traducido = response;
+    setState((){});
   }
 
   // Upload image with a uuid in dir: imagenesTraduccion
+  // Se agrego el uso de utils/constants
   Future uploadFile(BuildContext context) async{
-    UploadTask updloadTask = FirebaseStorage.instance.ref().child('imagenesTraduccion').child(Uuid().v1()).putFile(imagen!);
+    UploadTask updloadTask = FirebaseStorage.instance.ref().child(RUTA_IMAGEN).child(Uuid().v1()).putFile(imagen!);
     TaskSnapshot taskSnapshot = await updloadTask;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     log(downloadUrl);
@@ -53,7 +96,7 @@ class _ImagenState extends State<Imagen> {
     return AlertDialog(
       title: Text('Notificacion'),
       content:
-      Text("La imagen se ha cargado con exito"),
+      const Text(MENSAJE_EXITO_CARGA_IMAGEN),
       actions: <Widget>[
         FlatButton(
             child: Text("Aceptar"),
@@ -176,10 +219,20 @@ class _ImagenState extends State<Imagen> {
                   },
                   child: Text('Cargar imagen'),
                 ),
+                ElevatedButton(
+                  onPressed: (){
+                    insertTraduccion(loggedInUser.email.toString(), escaneado, traducido);
+                    conteoEspanol(loggedInUser.email.toString(),escaneado);
+                    conteoIngles(loggedInUser.email.toString(),traducido);
+                  },
+                  child: Text('Guardar traducción'),
+                ),
                 SizedBox(
                   height: 30,
                 ),
                 imagen == null ? Center() : Image.file(imagen!),
+                Text("\nTexto detectado:\n\n"+escaneado+"\n"),
+                Text("Traduccion:\n\n"+traducido)
               ],
             ),
           )

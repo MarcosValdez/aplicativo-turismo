@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 
 import 'Model/user_model.dart';
 import '../../color_constants.dart';
@@ -13,6 +17,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  late String _paisselecto;
+  List futurepaisreg = [{"display":"asd","value":"asd"} ];
   final _auth = FirebaseAuth.instance;
   bool _passwordVisible = false;
   String? errorMessage;
@@ -37,9 +43,10 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void initState() {
+    _paisselecto='';
     _passwordVisible = false;
+    dropform();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +86,25 @@ class _RegisterPageState extends State<RegisterPage> {
         name(),
         email(),
         contrasen(),
+        DropDownFormField(
+          titleText: 'Pais',
+          hintText: 'Selecciona pais de procedencia',
+          value: _paisselecto,
+          onSaved: (value){
+            setState((){
+              _paisselecto=value;
+            });
+          },
+          onChanged: (value) {
+            setState(() {
+              _paisselecto = value;
+            });
+          },
+          dataSource: futurepaisreg,
+          textField: 'display',
+          valueField: 'value',
+
+        ),
         btn_registrar(),
         divider_blanco(),
         szbox(),
@@ -86,6 +112,28 @@ class _RegisterPageState extends State<RegisterPage> {
         btn_login(),
       ],
     );
+  }
+
+  Future dropform() async{
+    futurepaisreg = await fetchPaisReg();
+    setState((){});
+  }
+
+  Future<List> fetchPaisReg() async {
+    final response = await http.get(
+      Uri.https(
+          'api-turismo-backend.herokuapp.com',
+          '/biblioteca/listar-todos-paises'
+      ),
+    );
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body) as List;
+      return body.map((dynamic json) {
+        return {"display": '${json['nombre']}', "value":'${json['nombre']}'};
+      }).toList();
+    }
+    throw Exception('error fetching posts');
+
   }
   
   Widget name(){
@@ -223,9 +271,8 @@ class _RegisterPageState extends State<RegisterPage> {
             TextButton(
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 12, horizontal: 80),
+                    vertical: 12, horizontal: 10),
                 primary: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {
                 registroUsuario(correo.text, contrasenia.text);
@@ -313,6 +360,7 @@ class _RegisterPageState extends State<RegisterPage> {
     userModel.email = user!.email;
     userModel.uid = user.uid;
     userModel.nombre = nombre.text;
+    userModel.pais = _paisselecto;
 
     await firebaseFirestore
         .collection("users")
