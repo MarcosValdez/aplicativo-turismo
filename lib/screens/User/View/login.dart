@@ -1,11 +1,8 @@
-import 'package:aplicativo_turismo/calendar/view/calendar.dart';
 import 'package:aplicativo_turismo/color_constants.dart';
-import 'package:aplicativo_turismo/main.dart';
-import 'package:aplicativo_turismo/screens/User/register.dart';
-import 'package:aplicativo_turismo/screens/menu.dart';
+import 'package:aplicativo_turismo/screens/User/View/register.dart';
+import 'package:aplicativo_turismo/screens/User/View/view_model_use.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -218,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                 primary: Colors.white,
               ),
               onPressed: () {
-                signIn(emailController.text, passwordController.text);
+                signIn(emailController.text, passwordController.text, _auth, _formKey, context);
               },
               child: const Text('Ingresar'),
             ),
@@ -254,48 +251,5 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: const Text('Registrar'),
     );
-  }
-
-  void signIn(String email, String password) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (_formKey.currentState!.validate()) {
-      try {
-        await _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) => {
-                  Fluttertoast.showToast(msg: "Accediendo"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => MyApp())),
-                  prefs.setString('email', email),
-                  prefs.setString('uid', uid.user!.uid),
-                });
-      } on FirebaseAuthException catch (error) {
-        switch (error.code) {
-          case "invalid-email":
-            errorMessage = "El email no tiene el formato correcto.";
-
-            break;
-          case "wrong-password":
-            errorMessage = "Contraseña incorrecta.";
-            break;
-          case "user-not-found":
-            errorMessage = "Email no registrado.";
-            break;
-          case "user-disabled":
-            errorMessage = "Usuario deshabilitado.";
-            break;
-          case "too-many-requests":
-            errorMessage = "Demasiadas peticiones";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "Operacion no permitida.";
-            break;
-          default:
-            errorMessage = "Ha ocurrido un error desconocido.";
-        }
-        Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
-      }
-    }
   }
 }

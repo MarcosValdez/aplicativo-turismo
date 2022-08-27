@@ -3,7 +3,7 @@ import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:aplicativo_turismo/Dictionary/view/screen/dictionary_screen.dart';
 import 'package:aplicativo_turismo/screens/Translate/imagen.dart';
 import 'package:aplicativo_turismo/screens/Translate/view/CargaImagen.dart';
-import 'package:aplicativo_turismo/screens/User/login.dart';
+import 'package:aplicativo_turismo/screens/User/View/login.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/Translate/busqueda.dart';
 import 'package:aplicativo_turismo/screens/Turism/lugarTuristico.dart';
-import 'package:aplicativo_turismo/screens/User/login.dart';
+import 'package:aplicativo_turismo/screens/User/View/login.dart';
 import 'package:flutter/material.dart';
 
 class BNavigation extends StatefulWidget {

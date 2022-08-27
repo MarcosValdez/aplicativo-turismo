@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-import 'package:aplicativo_turismo/screens/menu.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:aplicativo_turismo/color_constants.dart';
+import 'package:aplicativo_turismo/screens/User/View/view_model_use.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 
-import 'Model/user_model.dart';
-import '../../color_constants.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -275,7 +272,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 primary: Colors.white,
               ),
               onPressed: () {
-                registroUsuario(correo.text, contrasenia.text);
+                registroUsuario(correo.text, contrasenia.text, _auth, _formKey, nombre, _paisselecto, context);
               },
               child: const Text('Registrar'),
             ),
@@ -316,60 +313,5 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       child: const Text('Iniciar sesión'),
     );
-  }
-
-  void registroUsuario(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postDetailsToFirestore()})
-            .catchError((e) {
-          Fluttertoast.showToast(msg: e!.message);
-        });
-      } on FirebaseAuthException catch (error) {
-        switch (error.code) {
-          case "invalid-email":
-            errorMessage = "El email no tiene el formato correcto.";
-
-            break;
-          case "user-disabled":
-            errorMessage = "Usuario deshabilitado.";
-            break;
-          case "too-many-requests":
-            errorMessage = "Demasiadas peticiones";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "Operacion no permitida.";
-            break;
-          default:
-            errorMessage = "Ha ocurrido un error desconocido.";
-        }
-        Fluttertoast.showToast(msg: errorMessage!, timeInSecForIosWeb: 3);
-        print(error.code);
-      }
-    }
-  }
-
-  postDetailsToFirestore() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
-
-    UserModel userModel = UserModel();
-
-    userModel.email = user!.email;
-    userModel.uid = user.uid;
-    userModel.nombre = nombre.text;
-    userModel.pais = _paisselecto;
-
-    await firebaseFirestore
-        .collection("users")
-        .doc(user.uid)
-        .set(userModel.toMap());
-    Fluttertoast.showToast(
-        msg: "Registro realizado con exito ", timeInSecForIosWeb: 2);
-
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => Menu()), (route) => false);
   }
 }
