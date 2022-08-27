@@ -124,6 +124,34 @@ void insertTraduccion(String email, String txtOri, String txtTrad) async{
     "txt_traduc": txtTrad,
     "img": "img_url"
   };
+
+  var body = json.encode(datajson);
+  await http.post(
+      uri,
+      headers: {"Content-Type": "application/json"},
+      body: body
+  );
+}
+
+void conteoEspanol(String email, String txtOri) async{
+  var uri = Uri.parse('http://api-turismo-backend.herokuapp.com/conteo/contar_espanol/$txtOri');
+  
+  Map datajson = {
+    "palabra": txtOri,
+  };
+  var body = json.encode(datajson);
+  await http.post(
+      uri,
+      headers: {"Content-Type": "application/json"},
+      body: body
+  );
+}
+void conteoIngles(String email, String txtTrad) async{
+  var uri = Uri.parse('http://api-turismo-backend.herokuapp.com/conteo/contar_ingles/$txtTrad');
+ 
+  Map datajson = {
+    "palabra": txtTrad,
+  };
   var body = json.encode(datajson);
   await http.post(
       uri,
@@ -156,7 +184,7 @@ Future showTraduccionesEmail(String email) async
       data['txt_origen'],
       data['txt_traduc'],
       data['imagen']
-    );
+    );  
     // print(n.toMap());
   }
 }

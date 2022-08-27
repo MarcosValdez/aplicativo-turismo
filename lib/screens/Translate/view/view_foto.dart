@@ -222,6 +222,8 @@ class _ImagenState extends State<Imagen> {
                 ElevatedButton(
                   onPressed: (){
                     insertTraduccion(loggedInUser.email.toString(), escaneado, traducido);
+                    conteoEspanol(loggedInUser.email.toString(),escaneado);
+                    conteoIngles(loggedInUser.email.toString(),traducido);
                   },
                   child: Text('Guardar traducción'),
                 ),
