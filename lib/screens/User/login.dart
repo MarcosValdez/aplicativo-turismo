@@ -1,9 +1,11 @@
+import 'package:aplicativo_turismo/calendar/view/calendar.dart';
 import 'package:aplicativo_turismo/color_constants.dart';
 import 'package:aplicativo_turismo/screens/User/register.dart';
 import 'package:aplicativo_turismo/screens/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,39 +32,55 @@ class _LoginPageState extends State<LoginPage> {
     return _emailRegExp.hasMatch(str.toLowerCase());
   }
 
+  String uuid = "";
+
   void initState() {
     _passwordVisible = false;
+    // test();
+  }
+
+  void test() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    uuid = prefs.getString('uid')!;
+    // print("Login");
+    // print(uuid);
   }
 
   @override
   Widget build(BuildContext context) {
+    // if (uuid == "") {
+    //   Navigator.of(context)
+    //       .pushReplacement(MaterialPageRoute(builder: (context) => Menu()));
+    //   return Container();
+    // }
+
     return Scaffold(
       body: Container(
           child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              reverse: true,
-              padding: EdgeInsets.all(32),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: ColorConstants.fondoForms),
-                padding: const EdgeInsets.all(30),
-                margin: const EdgeInsets.all(30),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      txt_blanco("Iniciar sesión", 30),
-                      columna(),
-                    ],
-                  ),
-                ),
+        key: _formKey,
+        child: SingleChildScrollView(
+          reverse: true,
+          padding: EdgeInsets.all(32),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: ColorConstants.fondoForms),
+            padding: const EdgeInsets.all(30),
+            margin: const EdgeInsets.all(30),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  txt_blanco("Iniciar sesión", 30),
+                  columna(),
+                ],
               ),
             ),
-          )
-      ),
-        );
+          ),
+        ),
+      )),
+    );
   }
 
   Widget txt_blanco(String texto, double sz) {
@@ -239,6 +257,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void signIn(String email, String password) async {
+    final prefs = await SharedPreferences.getInstance();
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
@@ -247,6 +266,8 @@ class _LoginPageState extends State<LoginPage> {
                   Fluttertoast.showToast(msg: "Accediendo"),
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => Menu())),
+                  prefs.setString('email', email),
+                  prefs.setString('uid', uid.user!.uid),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

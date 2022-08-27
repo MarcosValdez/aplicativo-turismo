@@ -16,9 +16,8 @@ class TaskModel {
     required this.userId,
   });
 
-
   bool active;
-  DateTime date;
+  String date;
   String dateCreated;
   String dateUpdate;
   String description;
@@ -27,7 +26,7 @@ class TaskModel {
 
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
         active: json["active"],
-        date: DateTime.parse(json["date"]),
+        date: json["date"],
         dateCreated: json["date_created"],
         dateUpdate: json["date_update"],
         description: json["description"],
@@ -37,7 +36,7 @@ class TaskModel {
 
   Map<String, dynamic> toJson() => {
         "active": active,
-        "date": date.toIso8601String(),
+        "date": date,
         "date_created": dateCreated,
         "date_update": dateUpdate,
         "description": description,

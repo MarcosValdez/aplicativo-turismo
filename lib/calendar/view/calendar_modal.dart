@@ -2,6 +2,7 @@ import 'package:aplicativo_turismo/calendar/repo/task_service.dart';
 import 'package:aplicativo_turismo/calendar/view_model/task_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ModalFit extends StatelessWidget {
   ModalFit({required this.selectedDay});
@@ -47,9 +48,12 @@ class ModalFit extends StatelessWidget {
                       primary: Colors.white,
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+
+                      final String? uid = prefs.getString('uid');
                       TaskService.saveTask(
-                          '1', myController.text, selectedDay.toString());
+                          uid!, myController.text, selectedDay.toString());
                       Navigator.of(context).pop();
                     },
                     child: const Text('Guardar'),

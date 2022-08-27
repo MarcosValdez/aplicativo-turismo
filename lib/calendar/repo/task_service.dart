@@ -5,17 +5,21 @@ import 'package:aplicativo_turismo/calendar/model/task_model.dart';
 import 'package:aplicativo_turismo/calendar/repo/api_status.dart';
 import 'package:aplicativo_turismo/utils/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TaskService {
   static Future<Object> getTasks() async {
     try {
-      var user = '1';
-      var uri = Uri.parse('$ENDPOINT/task/user/$user');
+      // var user = '2';
+      final prefs = await SharedPreferences.getInstance();
+
+      final String? uid = prefs.getString('uid');
+      var uri = Uri.parse('$ENDPOINT/task/user/$uid');
       var response = await http.get(
         uri,
         headers: {"Content-Type": "application/json"},
       );
-      print(response.body);
+      // print(response.body);
       if (200 == response.statusCode) {
         return Success(code: 200, response: taskModelFromJson(response.body));
       }

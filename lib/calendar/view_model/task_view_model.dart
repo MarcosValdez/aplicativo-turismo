@@ -34,7 +34,7 @@ class TaskViewModel extends ChangeNotifier {
     var response = await TaskService.getTasks();
     if (response is Success) {
       List<TaskModel> taskList = response.response;
-      print(taskList);
+      // print(taskList);
       setTaskListModel(taskList);
     }
     if (response is Failure) {
